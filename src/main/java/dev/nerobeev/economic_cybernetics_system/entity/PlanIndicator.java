@@ -24,10 +24,10 @@ public class PlanIndicator {
   private Product product;
 
   @Column(nullable = false)
-  private Integer planYear; // Годовой план
+  private Integer planYear; // Год
 
   @Column(nullable = false)
-  private Integer planQuarter; // Квартальный план
+  private Integer planQuarter; // Квартал
 
   @Column(nullable = false, precision = 15, scale = 2)
   private BigDecimal plannedOutput; // Плановый выпуск

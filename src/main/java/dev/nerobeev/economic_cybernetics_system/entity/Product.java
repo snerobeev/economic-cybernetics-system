@@ -38,6 +38,7 @@ public class Product {
     this.name = name;
     this.unit = unit;
     this.sector = sector;
+    this.planIndicators = new ArrayList<>();
   }
 }
 
