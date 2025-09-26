@@ -60,7 +60,7 @@ class ProductTest {
     @Test
     @DisplayName("Should maintain plan indicator relationships")
     void shouldMaintainPlanIndicatorRelationships() {
-        assertEquals(plan, plank.getPlanIndicators().get(0));
+        assertEquals(plan, plank.getPlanIndicators().getFirst());
         assertEquals(plank, plan.getProduct());
     }
 

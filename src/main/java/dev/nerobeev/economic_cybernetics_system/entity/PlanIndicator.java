@@ -80,7 +80,16 @@ PlanIndicator pending = PlanIndicator.builder()
     return deviation != null && deviation.compareTo(BigDecimal.ZERO) != 0;
   }
 
-/*
+  public PlanIndicator(
+      Product product, Integer planYear, Integer planQuarter, BigDecimal plannedOutput, BigDecimal actualOutput) {
+    this.product = product;
+    this.planYear = planYear;
+    this.planQuarter = planQuarter;
+    this.plannedOutput = plannedOutput;
+    this.actualOutput = actualOutput;
+  }
+
+  /*
 deviation != null - есть данные для расчета
 deviation.compareTo(BigDecimal.ZERO) != 0 - отклонение не равно
 --Точное выполнение плана
