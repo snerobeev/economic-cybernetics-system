@@ -1,6 +1,6 @@
 package dev.nerobeev.economic_cybernetics_system.dto.economic_sector;
 
-public record EconomicSectorResponseDto(
+public record EconomicSectorResponse(
     Long id,
     String name,
     String code,

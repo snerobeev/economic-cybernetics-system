@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.service;
+package dev.nerobeev.economic_cybernetics_system.service.planindicator;
 
 import dev.nerobeev.economic_cybernetics_system.entity.PlanIndicator;
 import dev.nerobeev.economic_cybernetics_system.repository.PlanIndicatorRepository;
@@ -9,5 +9,19 @@ public class PlanIndicatorService {
 
   private PlanIndicatorRepository indicatorRepository;
   private PlanIndicator planIndicator;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

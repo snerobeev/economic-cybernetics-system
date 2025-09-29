@@ -9,12 +9,11 @@ import java.util.List;
 // Продукт/товар
 @Entity
 @Table(name = "products")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
+@Getter
+@Setter
 @Builder
-@ToString(exclude = {"planIndicators", "sector"})
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

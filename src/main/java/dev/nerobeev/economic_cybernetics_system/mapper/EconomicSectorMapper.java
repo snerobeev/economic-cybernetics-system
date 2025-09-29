@@ -1,7 +1,7 @@
 package dev.nerobeev.economic_cybernetics_system.mapper;
 
-import dev.nerobeev.economic_cybernetics_system.dto.economic_sector.EconomicSectorRequestDto;
-import dev.nerobeev.economic_cybernetics_system.dto.economic_sector.EconomicSectorResponseDto;
+import dev.nerobeev.economic_cybernetics_system.dto.economic_sector.EconomicSectorCreateRequest;
+import dev.nerobeev.economic_cybernetics_system.dto.economic_sector.EconomicSectorResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.EconomicSector;
 import org.mapstruct.*;
 
@@ -12,15 +12,16 @@ import java.util.List;
         uses = {JsonNullableMapper.class})
 public interface EconomicSectorMapper {
 
-  // Entity -> Response DTO (Для отправки клиенту)
-  EconomicSectorResponseDto toDto(EconomicSector sector);
+  // Request DTO -> Entity (Запрос на создание нового сектора)
+  EconomicSector toEntity(EconomicSectorCreateRequest dto);
+
+  // Entity -> Response DTO (Ответ клиенту)
+  EconomicSectorResponse toDto(EconomicSector sector);
 
   // List<Entity> -> List<Response DTO>
-  List<EconomicSectorResponseDto> toDto(List<EconomicSector> sectors);
+  List<EconomicSectorResponse> toDto(List<EconomicSector> sectors);
 
-  // Request DTO -> Entity (Для создания нового сектора)
-  EconomicSector toEntity(EconomicSectorRequestDto dto);
 
   // Обновление существующей сущности из DTO (для PUT/PATCH)
-  void updateEntityFromDto(EconomicSectorRequestDto dto, @MappingTarget EconomicSector sector);
+  void updateEntityFromDto(EconomicSectorCreateRequest dto, @MappingTarget EconomicSector sector);
 }

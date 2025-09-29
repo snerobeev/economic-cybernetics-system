@@ -18,6 +18,7 @@ class ProductTest {
     private Product plank;
     private PlanIndicator plan;
 
+
     @BeforeEach
     void setup() {
         sector = new EconomicSector("Деревообработка", "02", "Отрасль");
@@ -35,6 +36,7 @@ class ProductTest {
 
     @Test
     @DisplayName("Should create product with relationships")
+
     void shouldCreateProductWithRelationships() {
         assertEquals("Доска обрезная 40", plank.getName());
         assertEquals("5 м", plank.getUnit());
