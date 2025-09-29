@@ -13,10 +13,11 @@ import java.util.List;
 public interface EconomicSectorMapper {
 
   // Request DTO -> Entity (Запрос на создание нового сектора)
+  @Mapping(target = "id",ignore = true)
   EconomicSector toEntity(EconomicSectorCreateRequest dto);
 
   // Entity -> Response DTO (Ответ клиенту)
-  EconomicSectorResponse toDto(EconomicSector sector);
+  EconomicSectorResponse toResponse(EconomicSector sector);
 
   // List<Entity> -> List<Response DTO>
   List<EconomicSectorResponse> toDto(List<EconomicSector> sectors);

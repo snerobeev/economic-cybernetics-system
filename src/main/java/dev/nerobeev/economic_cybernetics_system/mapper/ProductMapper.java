@@ -6,23 +6,20 @@ import dev.nerobeev.economic_cybernetics_system.entity.Product;
 import org.mapstruct.*;
 
 @Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE,
-    uses = {JsonNullableMapper.class})
+        componentModel = MappingConstants.ComponentModel.SPRING,
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = {JsonNullableMapper.class})
 
 public interface ProductMapper {
+//    @Mapping(source = "sector.id", target = "sectorId")
+//    @Mapping(source = "sector.code", target = "code")
+//    @Mapping(source = "sector.name", target = "description")
 
-  // Request DTO -> Entity (Запрос на создание нового продукта)
-  @Mapping(target = "id",ignore = true)
-  @Mapping(target = "name", ignore = true)
-  @Mapping(target = "unit", ignore = true)
-  @Mapping(target = "sector", ignore = true)
-  Product toEntity(ProductCreateRequest dto);
+    // Request DTO -> Entity (Запрос на создание нового продукта)
+    @Mapping(target = "id", ignore = true)
+    Product toEntity(ProductCreateRequest dto);
 
-  // Entity -> Response DTO (Ответ клиенту)
-  @Mapping(target = "id", ignore = true)
-  @Mapping(target = "name", ignore = true)
-  @Mapping(target = "unit", ignore = true)
-  ProductResponse toResponse(Product product);
+    // Entity -> Response DTO (Ответ клиенту)
+    ProductResponse toResponse(Product product);
 }

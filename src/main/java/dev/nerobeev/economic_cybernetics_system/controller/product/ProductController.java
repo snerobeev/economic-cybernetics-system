@@ -17,7 +17,7 @@ public class ProductController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ProductResponse createProduct(@Valid @RequestBody ProductCreateRequest request) {
+  public ProductResponse createProduct(@RequestBody @Valid ProductCreateRequest request) {
     return productService.createProduct(request);
   }
 

@@ -8,18 +8,16 @@ import jakarta.validation.constraints.Size;
 
 public record ProductCreateRequest(
 
-    Long id,
-
     @NotBlank(message = "Название продукта обязательно")
     @Size(max = 100, message = "Название должно не превышать 100 символов")
     String name,
 
     @NotBlank(message = "Единица измерения обязательна")
     @Size(max = 50, message = "Единица измерения не должна превышать 50 символов")
-    String sector_id,
+    String unit,
 
     @NotNull(message = "Код сектора обязателен")
-    Long unit
+    Long sector_id
 
 
 ) {
