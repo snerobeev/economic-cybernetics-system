@@ -1,4 +1,8 @@
 spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+
   application:
     name: economic-cybernetics-system
 
@@ -36,6 +40,8 @@ logging:
     dev.nerobeev.economic_cybernetics_system: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.orm.jdbc.bind: TRACE
+
 
 # Настройки экономических расчетов
 economic-cybernetics:
