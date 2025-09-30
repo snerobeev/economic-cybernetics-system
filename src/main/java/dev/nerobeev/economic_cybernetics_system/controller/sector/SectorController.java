@@ -1,7 +1,7 @@
-package dev.nerobeev.economic_cybernetics_system.controller.economicsector;
+package dev.nerobeev.economic_cybernetics_system.controller.sector;
 
-import dev.nerobeev.economic_cybernetics_system.dto.economic_sector.SectorCreateRequest;
-import dev.nerobeev.economic_cybernetics_system.dto.economic_sector.SectorResponse;
+import dev.nerobeev.economic_cybernetics_system.dto.sector.SectorCreateRequest;
+import dev.nerobeev.economic_cybernetics_system.dto.sector.SectorResponse;
 import dev.nerobeev.economic_cybernetics_system.service.sector.SectorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

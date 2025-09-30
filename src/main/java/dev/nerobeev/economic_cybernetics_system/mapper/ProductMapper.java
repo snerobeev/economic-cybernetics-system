@@ -12,14 +12,14 @@ import org.mapstruct.*;
         uses = {JsonNullableMapper.class})
 
 public interface ProductMapper {
-//    @Mapping(source = "sector.id", target = "sectorId")
-//    @Mapping(source = "sector.code", target = "code")
-//    @Mapping(source = "sector.name", target = "description")
 
     // Request DTO -> Entity (Запрос на создание нового продукта)
     @Mapping(target = "id", ignore = true)
     Product toEntity(ProductCreateRequest dto);
 
     // Entity -> Response DTO (Ответ клиенту)
+    @Mapping(source = "sector.id", target = "sectorId")
+    @Mapping(source = "sector.code", target = "code")
+    @Mapping(source = "sector.name", target = "description")
     ProductResponse toResponse(Product product);
 }

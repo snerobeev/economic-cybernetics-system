@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.dto.economic_sector;
+package dev.nerobeev.economic_cybernetics_system.dto.sector;
 
 public record SectorResponse(
     Long id,

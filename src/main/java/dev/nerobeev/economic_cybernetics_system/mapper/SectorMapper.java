@@ -1,7 +1,7 @@
 package dev.nerobeev.economic_cybernetics_system.mapper;
 
-import dev.nerobeev.economic_cybernetics_system.dto.economic_sector.SectorCreateRequest;
-import dev.nerobeev.economic_cybernetics_system.dto.economic_sector.SectorResponse;
+import dev.nerobeev.economic_cybernetics_system.dto.sector.SectorCreateRequest;
+import dev.nerobeev.economic_cybernetics_system.dto.sector.SectorResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.Sector;
 import org.mapstruct.*;
 
