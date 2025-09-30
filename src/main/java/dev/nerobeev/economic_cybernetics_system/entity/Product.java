@@ -27,14 +27,14 @@ public class Product {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "sector_id")
-  private EconomicSector sector;
+  private Sector sector;
 
   @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @Builder.Default
   private List<PlanIndicator> planIndicators = new ArrayList<>();
 
   // Конструктор для тестов
-  public Product(String name, String unit, EconomicSector sector) {
+  public Product(String name, String unit, Sector sector) {
     this.name = name;
     this.unit = unit;
     this.sector = sector;

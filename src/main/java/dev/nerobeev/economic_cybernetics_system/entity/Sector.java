@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = {"products"})
-public class EconomicSector {
+public class Sector {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -35,7 +35,7 @@ public class EconomicSector {
   private List<Product> products = new ArrayList<>();
 
   // Конструктор для тестов
-  public EconomicSector(String name, String code, String description) {
+  public Sector(String name, String code, String description) {
     this.name = name;
     this.code = code;
     this.description = description;

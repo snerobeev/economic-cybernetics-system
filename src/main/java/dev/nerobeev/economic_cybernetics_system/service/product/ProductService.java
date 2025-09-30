@@ -2,6 +2,7 @@ package dev.nerobeev.economic_cybernetics_system.service.product;
 
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;
+import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundExeption;
 import dev.nerobeev.economic_cybernetics_system.mapper.ProductMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +27,11 @@ public class ProductService {
     return productRepository.findAll().stream()
                             .map(productMapper::toResponse)
                             .toList();
+  }
+
+  public ProductResponse getProductById(Long id) {
+    var product = productRepository.findById(id)
+                                   .orElseThrow(() -> new ProductNotFoundExeption(id));
+    return productMapper.toResponse(product);
   }
 }

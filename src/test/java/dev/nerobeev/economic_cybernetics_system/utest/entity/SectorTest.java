@@ -1,6 +1,6 @@
 package dev.nerobeev.economic_cybernetics_system.utest.entity;
 
-import dev.nerobeev.economic_cybernetics_system.entity.EconomicSector;
+import dev.nerobeev.economic_cybernetics_system.entity.Sector;
 import dev.nerobeev.economic_cybernetics_system.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,14 +9,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Economic Sector Test")
-class EconomicSectorTest {
+class SectorTest {
 
-  private EconomicSector agriculture;
+  private Sector agriculture;
   private Product wheat;
 
   @BeforeEach
   void setup() {
-    agriculture = new EconomicSector("Сельское хозяйство", "01", "Сектор сельского хозяйства");
+    agriculture = new Sector("Сельское хозяйство", "01", "Сектор сельского хозяйства");
     wheat = new Product("Пшеница", "тонн", agriculture);
     agriculture.getProducts().add(wheat);
   }
@@ -45,9 +45,9 @@ class EconomicSectorTest {
 
   @Test
   @DisplayName("Should use Lombok generated methods")
-  void souldUseLombokGeneratedMethods() {
-    var economicSector1 = new EconomicSector("Test", "T1", "Test sector");
-    var economicSector2 = new EconomicSector("Test", "T1", "Test sector");
+  void shouldUseLombokGeneratedMethods() {
+    var economicSector1 = new Sector("Test", "T1", "Test sector");
+    var economicSector2 = new Sector("Test", "T1", "Test sector");
     // Equals по коду благодаря @EqualsAndHashCode(onlyExplicitlyIncluded = true)
     assertEquals(economicSector1,economicSector2);
     assertEquals(economicSector1.hashCode(),economicSector2.hashCode());
@@ -60,12 +60,12 @@ class EconomicSectorTest {
   @Test
   @DisplayName("Should support Builder pattern")
   void shouldSupportBuilderPattern() {
-    EconomicSector sector = EconomicSector.builder()
-        .id(1L)
-        .name("Металлургическая промышленность")
-        .code("02")
-        .description("Цветная металлургия")
-        .build();
+    Sector sector = Sector.builder()
+                          .id(1L)
+                          .name("Металлургическая промышленность")
+                          .code("02")
+                          .description("Цветная металлургия")
+                          .build();
 
     assertEquals(1,sector.getId());
     assertEquals("Металлургическая промышленность",sector.getName());

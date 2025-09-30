@@ -6,7 +6,10 @@ import dev.nerobeev.economic_cybernetics_system.service.product.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
@@ -14,6 +17,17 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
   private final ProductService productService;
+
+  @GetMapping
+  public ResponseEntity<List<ProductResponse>> getAllProducts() {
+    var products = productService.getAllProducts();
+    return ResponseEntity.ok().header("X-Total-Count", String.valueOf(products.size())).body(products);
+  }
+
+  @GetMapping("/{id}")
+  public ProductResponse getProductById(@PathVariable Long id) {
+    return productService.getProductById(id);
+  }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)

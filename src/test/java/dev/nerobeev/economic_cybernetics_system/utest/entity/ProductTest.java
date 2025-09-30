@@ -1,6 +1,6 @@
 package dev.nerobeev.economic_cybernetics_system.utest.entity;
 
-import dev.nerobeev.economic_cybernetics_system.entity.EconomicSector;
+import dev.nerobeev.economic_cybernetics_system.entity.Sector;
 import dev.nerobeev.economic_cybernetics_system.entity.PlanIndicator;
 import dev.nerobeev.economic_cybernetics_system.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,14 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DisplayName("Product Tests")
 class ProductTest {
-    private EconomicSector sector;
+    private Sector sector;
     private Product plank;
     private PlanIndicator plan;
 
 
     @BeforeEach
     void setup() {
-        sector = new EconomicSector("Деревообработка", "02", "Отрасль");
+        sector = new Sector("Деревообработка", "02", "Отрасль");
         plank = new Product("Доска обрезная 40", "5 м", sector);
         plan = PlanIndicator.builder()
                 .product(plank)

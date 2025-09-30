@@ -1,11 +1,11 @@
-package dev.nerobeev.economic_cybernetics_system.dto;
+package dev.nerobeev.economic_cybernetics_system.dto.planindicator;
 
 import dev.nerobeev.economic_cybernetics_system.entity.Product;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record PlanIndicatorResponseDto(
+public record PlanIndicatorResponse(
     Long id,
     Product product,
     Integer planYear,

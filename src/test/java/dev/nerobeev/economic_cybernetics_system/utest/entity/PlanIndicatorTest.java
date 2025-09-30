@@ -1,6 +1,6 @@
 //package dev.nerobeev.economic_cybernetics_system.utest.entity;
 //
-//import dev.nerobeev.economic_cybernetics_system.entity.EconomicSector;
+//import dev.nerobeev.economic_cybernetics_system.entity.Sector;
 //import dev.nerobeev.economic_cybernetics_system.entity.PlanIndicator;
 //import dev.nerobeev.economic_cybernetics_system.entity.Product;
 //import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +20,7 @@
 //
 //    @BeforeEach
 //    void setUp() {
-//        EconomicSector sector = new EconomicSector("Тест", "01", "Тестовый сектор");
+//        Sector sector = new Sector("Тест", "01", "Тестовый сектор");
 //        product = new Product("Тестовый продукт", "шт", sector);
 //
 //        indicator = PlanIndicator.builder()
