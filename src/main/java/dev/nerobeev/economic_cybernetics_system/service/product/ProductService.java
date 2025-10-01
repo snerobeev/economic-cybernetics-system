@@ -2,8 +2,8 @@ package dev.nerobeev.economic_cybernetics_system.service.product;
 
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;
-import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundExeption;
-import dev.nerobeev.economic_cybernetics_system.exeption.SectorNotFoundExeption;
+import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundException;
+import dev.nerobeev.economic_cybernetics_system.exeption.SectorNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.ProductMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.ProductRepository;
 import dev.nerobeev.economic_cybernetics_system.repository.SectorRepository;
@@ -23,8 +23,9 @@ public class ProductService {
     public ProductResponse createProduct(ProductCreateRequest request) {
 
         var product = productMapper.toEntity(request);
-        var sector = sectorRepository.findById(request.sector_id())
-                .orElseThrow(() -> new SectorNotFoundExeption(product.getId()));
+        var sectorId = request.sector_id();
+        var sector = sectorRepository.findById(sectorId)
+                .orElseThrow(() -> new SectorNotFoundException(sectorId));
         product.setSector(sector);
         var savedProduct = productRepository.save(product);
 
@@ -40,7 +41,7 @@ public class ProductService {
 
     public ProductResponse getProductById(Long id) {
         var product = productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundExeption(id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
         return productMapper.toResponse(product);
     }
 }

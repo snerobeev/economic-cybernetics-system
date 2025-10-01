@@ -3,7 +3,7 @@ package dev.nerobeev.economic_cybernetics_system.service.sector;
 import dev.nerobeev.economic_cybernetics_system.dto.sector.SectorCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.sector.SectorResponse;
 import dev.nerobeev.economic_cybernetics_system.exeption.SectorAlreadyExistsException;
-import dev.nerobeev.economic_cybernetics_system.exeption.SectorNotFoundExeption;
+import dev.nerobeev.economic_cybernetics_system.exeption.SectorNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.SectorMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.SectorRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class SectorService {
 
     public SectorResponse getSectorById(Long id) {
         var sector = sectorRepository.findById(id)
-                .orElseThrow(() -> new SectorNotFoundExeption(id));
+                .orElseThrow(() -> new SectorNotFoundException(id));
         return sectorMapper.toResponse(sector);
     }
 

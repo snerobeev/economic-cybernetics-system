@@ -34,6 +34,8 @@ spring:
 
 server:
   port: 8080
+  error:
+    include-stacktrace: never
 
 logging:
   level:
