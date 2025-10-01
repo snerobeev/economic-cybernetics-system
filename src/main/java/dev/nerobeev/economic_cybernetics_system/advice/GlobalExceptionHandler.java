@@ -1,4 +1,4 @@
-package dev.nerobeev.advice;
+package dev.nerobeev.economic_cybernetics_system.advice;
 
 import dev.nerobeev.economic_cybernetics_system.dto.error.ErrorMessageResponse;
 import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundException;
