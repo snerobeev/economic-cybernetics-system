@@ -3,6 +3,7 @@ package dev.nerobeev.economic_cybernetics_system.service.product;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;
 import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundExeption;
+import dev.nerobeev.economic_cybernetics_system.exeption.SectorNotFoundExeption;
 import dev.nerobeev.economic_cybernetics_system.mapper.ProductMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.ProductRepository;
 import dev.nerobeev.economic_cybernetics_system.repository.SectorRepository;
@@ -23,7 +24,7 @@ public class ProductService {
 
         var product = productMapper.toEntity(request);
         var sector = sectorRepository.findById(request.sector_id())
-                .orElseThrow(() -> new ProductNotFoundExeption(product.getId()));
+                .orElseThrow(() -> new SectorNotFoundExeption(product.getId()));
         product.setSector(sector);
         var savedProduct = productRepository.save(product);
 
