@@ -6,6 +6,7 @@ public record ProductResponse(
     String unit,
     Long sectorId,
     String code,
-    String description
+    String description,
+    String markingCode
 ) {
 }

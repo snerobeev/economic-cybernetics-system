@@ -1,5 +1,7 @@
 package dev.nerobeev.economic_cybernetics_system.service.product;
 
+import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingGenerator;
+import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;
 import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundException;
@@ -19,6 +21,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final SectorRepository sectorRepository;
+    private final MarkingGenerator markingGenerator;
 
     public ProductResponse createProduct(ProductCreateRequest request) {
 
@@ -26,6 +29,7 @@ public class ProductService {
         var sectorId = request.sector_id();
         var sector = sectorRepository.findById(sectorId)
                 .orElseThrow(() -> new SectorNotFoundException(sectorId));
+        product.setCode(markingGenerator.generate(MarkingType.PRODUCT));
         product.setSector(sector);
         var savedProduct = productRepository.save(product);
 
