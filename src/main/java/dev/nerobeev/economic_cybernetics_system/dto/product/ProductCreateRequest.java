@@ -17,8 +17,7 @@ public record ProductCreateRequest(
     String unit,
 
     @NotNull(message = "Код сектора обязателен")
-    Long sector_id
+    Long sector_id,
 
-
-) {
+    String markingCode) {
 }

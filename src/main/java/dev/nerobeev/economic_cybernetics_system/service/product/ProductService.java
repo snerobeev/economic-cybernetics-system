@@ -18,34 +18,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
 
-    private final ProductRepository productRepository;
-    private final ProductMapper productMapper;
-    private final SectorRepository sectorRepository;
-    private final MarkingGenerator markingGenerator;
+  private final ProductRepository productRepository;
+  private final ProductMapper productMapper;
+  private final SectorRepository sectorRepository;
+  private final MarkingGenerator markingGenerator;
 
-    public ProductResponse createProduct(ProductCreateRequest request) {
+  public ProductResponse createProduct(ProductCreateRequest request) {
 
-        var product = productMapper.toEntity(request);
-        var sectorId = request.sector_id();
-        var sector = sectorRepository.findById(sectorId)
-                .orElseThrow(() -> new SectorNotFoundException(sectorId));
-        product.setCode(markingGenerator.generate(MarkingType.PRODUCT));
-        product.setSector(sector);
-        var savedProduct = productRepository.save(product);
+    var product = productMapper.toEntity(request, markingGenerator);
+    var sectorId = request.sector_id();
+    var sector = sectorRepository.findById(sectorId)
+                                 .orElseThrow(() -> new SectorNotFoundException(sectorId));
+    product.setSector(sector);
+    System.out.println("Marking code: " + product.getMarkingCode());
+    product.setCode(markingGenerator.generate(MarkingType.PRODUCT));
+    var savedProduct = productRepository.save(product);
 
-        return productMapper.toResponse(savedProduct);
+    return productMapper.toResponse(savedProduct);
 
-    }
+  }
 
-    public List<ProductResponse> getAllProducts() {
-        return productRepository.findAll().stream()
-                .map(productMapper::toResponse)
-                .toList();
-    }
+  public List<ProductResponse> getAllProducts() {
+    return productRepository.findAll().stream()
+                            .map(productMapper::toResponse)
+                            .toList();
+  }
 
-    public ProductResponse getProductById(Long id) {
-        var product = productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException(id));
-        return productMapper.toResponse(product);
-    }
+  public ProductResponse getProductById(Long id) {
+    var product = productRepository.findById(id)
+                                   .orElseThrow(() -> new ProductNotFoundException(id));
+    return productMapper.toResponse(product);
+  }
 }

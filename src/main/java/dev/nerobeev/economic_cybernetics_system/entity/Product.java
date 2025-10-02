@@ -35,7 +35,7 @@ public class Product {
   @JoinColumn(name = "sector_id")
   private Sector sector;
 
-  @Column(unique = true, nullable = false)
+  @Column(unique = true)
   private String markingCode;
 
   @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

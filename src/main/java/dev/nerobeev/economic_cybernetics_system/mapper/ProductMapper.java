@@ -4,7 +4,6 @@ import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingGenerat
 import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;
-import dev.nerobeev.economic_cybernetics_system.entity.Material;
 import dev.nerobeev.economic_cybernetics_system.entity.Product;
 import org.mapstruct.*;
 
@@ -18,7 +17,7 @@ public interface ProductMapper {
 
   // Request DTO -> Entity (Запрос на создание нового продукта)
   @Mapping(target = "id", ignore = true)
-  Product toEntity(ProductCreateRequest request);
+  Product toEntity(ProductCreateRequest request,@Context MarkingGenerator generator);
 
   // Entity -> Response DTO (Ответ клиенту)
   @Mapping(source = "sector.id", target = "sectorId")
