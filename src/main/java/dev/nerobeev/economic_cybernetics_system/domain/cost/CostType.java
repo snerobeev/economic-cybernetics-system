@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.domain.cost.type;
+package dev.nerobeev.economic_cybernetics_system.domain.cost;
 
 /*
  ** СПРАВОЧНИК конкретных видов затрат (энергия, зарплата, реклама и т.д.)

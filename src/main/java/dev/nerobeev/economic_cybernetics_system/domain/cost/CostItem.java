@@ -1,6 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.domain.cost.model;
-
-import dev.nerobeev.economic_cybernetics_system.domain.cost.type.CostType;
+package dev.nerobeev.economic_cybernetics_system.domain.cost;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,5 +1,6 @@
 package dev.nerobeev.economic_cybernetics_system.entity;
 
+import dev.nerobeev.economic_cybernetics_system.domain.measure.UnitOfMeasure;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -20,33 +21,40 @@ import java.math.BigDecimal;
 @Setter
 @Builder
 public class Material {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(nullable = false)
-  private String name;
+    @Column(nullable = false)
+    private String name;
 
-  private String supplier;
+    private String supplier;
 
-  @Column(nullable = false)
-  private BigDecimal cost;
+    @Column(nullable = false)
+    private BigDecimal quantity;
 
-  @Column(unique = true, nullable = false)
-  private String code;
+    @Column(unique = true, nullable = false)
+    private String code;
 
-  // Конструктор для тестов
-  public Material(String name, String supplier, BigDecimal cost) {
-    this.name = name;
-    this.supplier = supplier;
-    this.cost = cost;
-  }
+    @Column(nullable = false)
+    private BigDecimal costPerUnit;
 
-  /*
-   *
-   *  Можно добавить поле quantity и unit, учитывать объём.
-   *  Можно связать Material с Product через @ManyToOne или @ManyToMany, в зависимости от модели.
-   *  Можно добавить @CreatedDate и @LastModifiedDate для аудита.
-   */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UnitOfMeasure unit;
+
+    // Конструктор для тестов
+    public Material(String name, String supplier, BigDecimal costPerUnit) {
+        this.name = name;
+        this.supplier = supplier;
+        this.costPerUnit = costPerUnit;
+    }
+
+    /*
+     *
+     *  Можно добавить поле quantity и unit, учитывать объём.
+     *  Можно связать Material с Product через @ManyToOne или @ManyToMany, в зависимости от модели.
+     *  Можно добавить @CreatedDate и @LastModifiedDate для аудита.
+     */
 
 }
