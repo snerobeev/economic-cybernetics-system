@@ -1,12 +1,12 @@
 package dev.nerobeev.economic_cybernetics_system.exeption;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND) //todo <-- правильно ли так делать?
-public class ProductNotFoundException extends EntityNotFoundException {
-  public ProductNotFoundException(long id) {
-    super("Продукт с ID " + id + " не найден, задайте ID сектора");
+public class MaterialNotFoundException extends RuntimeException {
+  public MaterialNotFoundException(String name) {
+
+    super("Материал с именем " + name + " не найден");
   }
 }

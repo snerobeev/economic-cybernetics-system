@@ -1,6 +1,7 @@
 package dev.nerobeev.economic_cybernetics_system.advice;
 
 import dev.nerobeev.economic_cybernetics_system.dto.error.ErrorMessageResponse;
+import dev.nerobeev.economic_cybernetics_system.exeption.MaterialAlreadyExistsException;
 import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.exeption.SectorNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-  @ExceptionHandler({ProductNotFoundException.class, SectorNotFoundException.class})
+  @ExceptionHandler({ProductNotFoundException.class, SectorNotFoundException.class, MaterialAlreadyExistsException.class})
   public ResponseEntity<ErrorMessageResponse> handleNotFound(RuntimeException exception) {
 
     log.error("Create product operation error: {}", exception.getMessage(), exception);

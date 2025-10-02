@@ -15,7 +15,7 @@ public interface ProductMapper {
 
     // Request DTO -> Entity (Запрос на создание нового продукта)
     @Mapping(target = "id", ignore = true)
-    Product toEntity(ProductCreateRequest dto);
+    Product toEntity(ProductCreateRequest request);
 
     // Entity -> Response DTO (Ответ клиенту)
     @Mapping(source = "sector.id", target = "sectorId")

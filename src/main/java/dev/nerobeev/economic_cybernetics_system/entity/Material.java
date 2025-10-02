@@ -11,6 +11,7 @@ import java.math.BigDecimal;
  * JPA-сущность, представляющая материальный ресурс,
  * используемый в производственном процессе.
  */
+
 @Entity
 @Table(name = "materials")
 @NoArgsConstructor
@@ -19,31 +20,33 @@ import java.math.BigDecimal;
 @Setter
 @Builder
 public class Material {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false)
-    private String name;
+  @Column(nullable = false)
+  private String name;
 
-    private String supplier;
+  private String supplier;
 
-    @Column(nullable = false)
-    private BigDecimal cost;
+  @Column(nullable = false)
+  private BigDecimal cost;
 
-    // Конструктор для тестов
-    public Material(String name, String supplier, BigDecimal cost) {
-        this.name = name;
-        this.supplier = supplier;
-        this.cost = cost;
-    }
+  @Column(unique = true, nullable = false)
+  private String code;
 
-    /*
-     *
-     *  Можно добавить поле quantity и unit, учитывать объём.
-     *  Можно связать Material с Product через @ManyToOne или @ManyToMany, в зависимости от модели.
-     *  Можно добавить @CreatedDate и @LastModifiedDate для аудита.
-     */
+  // Конструктор для тестов
+  public Material(String name, String supplier, BigDecimal cost) {
+    this.name = name;
+    this.supplier = supplier;
+    this.cost = cost;
+  }
 
+  /*
+   *
+   *  Можно добавить поле quantity и unit, учитывать объём.
+   *  Можно связать Material с Product через @ManyToOne или @ManyToMany, в зависимости от модели.
+   *  Можно добавить @CreatedDate и @LastModifiedDate для аудита.
+   */
 
 }
