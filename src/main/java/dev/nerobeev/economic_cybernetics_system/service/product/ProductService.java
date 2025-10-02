@@ -26,12 +26,13 @@ public class ProductService {
   public ProductResponse createProduct(ProductCreateRequest request) {
 
     var product = productMapper.toEntity(request, markingGenerator);
+    product.setCode(markingGenerator.generate(MarkingType.PRODUCT));
     var sectorId = request.sector_id();
     var sector = sectorRepository.findById(sectorId)
                                  .orElseThrow(() -> new SectorNotFoundException(sectorId));
     product.setSector(sector);
+
     System.out.println("Marking code: " + product.getMarkingCode());
-    product.setCode(markingGenerator.generate(MarkingType.PRODUCT));
     var savedProduct = productRepository.save(product);
 
     return productMapper.toResponse(savedProduct);
