@@ -6,7 +6,7 @@ public record MaterialResponse(
     Long id,
     String name,
     String supplier,
-    BigDecimal cost,
+    BigDecimal costPerUnit,
     String code
 ) {
 }
