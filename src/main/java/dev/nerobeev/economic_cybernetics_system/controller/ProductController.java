@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.controller.product;
+package dev.nerobeev.economic_cybernetics_system.controller;
 
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;

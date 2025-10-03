@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.domain.measure;
+package dev.nerobeev.economic_cybernetics_system.domain.newv.measure;
 
 public enum UnitOfMeasure {
     KILOGRAM("кг"),

@@ -1,10 +1,9 @@
 package dev.nerobeev.economic_cybernetics_system.service.material;
 
-import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingGenerator;
-import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingType;
+import dev.nerobeev.economic_cybernetics_system.domain.newv.markerator.MarkingGenerator;
+import dev.nerobeev.economic_cybernetics_system.domain.newv.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialResponse;
-import dev.nerobeev.economic_cybernetics_system.exeption.MaterialAlreadyExistsException;
 import dev.nerobeev.economic_cybernetics_system.exeption.MaterialNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.MaterialMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.MaterialRepository;
@@ -23,7 +22,7 @@ public class MaterialService {
   public MaterialResponse createMaterial(MaterialCreateRequest request) {
 
     var material = materialMapper.toEntity(request, markingGenerator);
-    material.setCode(markingGenerator.generate(MarkingType.MATERIAL));
+    material.setUCode(markingGenerator.generate(MarkingType.MATERIAL));
     var materialName = request.name(); // todo how to equals material?
     var savedMaterial = materialRepository.save(material);
 
