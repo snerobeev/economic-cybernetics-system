@@ -11,7 +11,7 @@ import org.mapstruct.*;
     componentModel = MappingConstants.ComponentModel.SPRING,
     nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
     unmappedTargetPolicy = ReportingPolicy.IGNORE,
-    uses = {JsonNullableMapper.class})
+    uses = {MaterialMapper.class,JsonNullableMapper.class})
 
 public interface ProductMapper {
 
@@ -20,15 +20,20 @@ public interface ProductMapper {
   Product toEntity(ProductCreateRequest request,@Context MarkingGenerator generator);
 
   // Entity -> Response DTO (Ответ клиенту)
-  @Mapping(source = "sector.id", target = "sectorId")
-  @Mapping(source = "sector.code", target = "code")
-  @Mapping(source = "sector.name", target = "description")
+  @Mapping(source = "id", target = "id")
+  @Mapping(source = "name", target = "name")
+  @Mapping(source = "uCode", target = "uCode")
+  @Mapping(source = "unit", target = "unit")
+  @Mapping(source = "costPerUnit", target = "costPerUnit")
+  @Mapping(source = "pricePerUnit", target = "pricePerUnit")
+  @Mapping(source = "producer", target = "producer")
+  @Mapping(source = "quantity", target = "quantity")
+  @Mapping(source = "status", target = "status")
+  @Mapping(source = "industryCode", target = "industryCode")
+  @Mapping(source = "planPeriod", target = "planPeriod")
+  @Mapping(source = "productionDate", target = "productionDate")
+  @Mapping(source = "strategic", target = "strategic")
+  @Mapping(source = "materials", target = "materials")
   ProductResponse toResponse(Product product);
 
-  @AfterMapping
-  default void assignCode(@MappingTarget Product product, @Context MarkingGenerator generator) {
-    if (product.getCode() == null) {
-      product.setCode(generator.generate(MarkingType.PRODUCT));
-    }
-  }
 }

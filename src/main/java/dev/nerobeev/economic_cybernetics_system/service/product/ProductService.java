@@ -5,10 +5,8 @@ import dev.nerobeev.economic_cybernetics_system.domain.newv.markerator.MarkingTy
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;
 import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundException;
-import dev.nerobeev.economic_cybernetics_system.exeption.SectorNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.ProductMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.ProductRepository;
-import dev.nerobeev.economic_cybernetics_system.repository.SectorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,19 +18,12 @@ public class ProductService {
 
   private final ProductRepository productRepository;
   private final ProductMapper productMapper;
-  private final SectorRepository sectorRepository;
   private final MarkingGenerator markingGenerator;
 
   public ProductResponse createProduct(ProductCreateRequest request) {
 
     var product = productMapper.toEntity(request, markingGenerator);
-    product.setCode(markingGenerator.generate(MarkingType.PRODUCT));
-    var sectorId = request.sector_id();
-    var sector = sectorRepository.findById(sectorId)
-                                 .orElseThrow(() -> new SectorNotFoundException(sectorId));
-    product.setSector(sector);
-
-    System.out.println("Marking code: " + product.getMarkingCode());
+    product.setUCode(markingGenerator.generate(MarkingType.PRODUCT));
     var savedProduct = productRepository.save(product);
 
     return productMapper.toResponse(savedProduct);

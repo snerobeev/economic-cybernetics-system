@@ -1,14 +1,21 @@
 package dev.nerobeev.economic_cybernetics_system.entity;
 
+import dev.nerobeev.economic_cybernetics_system.domain.newv.IndustryCode;
+import dev.nerobeev.economic_cybernetics_system.domain.newv.Status;
+import dev.nerobeev.economic_cybernetics_system.domain.newv.UnitOfMeasure;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
-/*
- ** Продукт, к которому привязаны затраты CostItem или <CostItem>
- */
 
+/*
+ ** JPA-сущность, представляющая готовый продукт,
+ *  итог производственного процесса.
+ */
 @Entity
 @Table(name = "products")
 @NoArgsConstructor
@@ -19,39 +26,57 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
-    private String name;
-
-    private String supplier;
-
-    @Column(nullable = false)
-    private String unit; // единица измерения (тонны, штуки, м³)
-
-    @Column(unique = true, nullable = false)
-    private String code;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sector_id")
-    private Sector sector;
+    public Long id;
 
     @Column(unique = true)
-    private String markingCode;
+    @Size(min = 3, max = 50)
+    public String name; // Название продукта (например, "Смартфон")
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Builder.Default
-    private List<PlanIndicator> planIndicators = new ArrayList<>();
+    @Column(unique = true)
+    public String uCode; // Уникальная маркировка: PRD-20251003-001
 
-//    private List<Material> materials; //todo
-//    private List<CostItem> costs; //todo
+    @Enumerated(EnumType.STRING)
+    public UnitOfMeasure unit; // Единица измерения: шт, тн, м²
+
+    @Column(unique = true)
+    public BigDecimal costPerUnit;  // Себестоимость единицы
+
+    @Column(unique = true)
+    public BigDecimal pricePerUnit; // Цена реализации (если отличается)
+
+    @Column(unique = true)
+    @Size(min = 3, max = 50)
+    public String producer; // Производитель
+
+    @Column(unique = true)
+    public BigDecimal quantity;  // Объём выпуска
+
+    @Enumerated(EnumType.STRING)
+    public Status status; // Статус: PRODUCT, EXPORTED_PRODUCT и т.д.
+
+    @Column(unique = true)
+    @Enumerated(EnumType.STRING)
+    public IndustryCode industryCode; // Код отрасли (например, ОКВЭД)
+
+    @Column(unique = true)
+    public String planPeriod; // Отражает временной интервал
+
+    @Column(unique = true)
+    @PastOrPresent
+    public LocalDate productionDate; // Дата производства
+
+    @Column(unique = true)
+    public Boolean strategic; // Является ли продукт стратегическим
+
+    @OneToMany()
+    private List<Material> materials;
+
 
     // Конструктор для тестов
-    public Product(String name, String unit, Sector sector) {
+    public Product(String name, UnitOfMeasure unit) {
         this.name = name;
         this.unit = unit;
-        this.sector = sector;
-        this.planIndicators = new ArrayList<>();
+
     }
 }
 

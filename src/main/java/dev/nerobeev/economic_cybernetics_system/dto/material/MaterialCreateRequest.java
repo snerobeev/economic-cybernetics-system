@@ -2,14 +2,15 @@ package dev.nerobeev.economic_cybernetics_system.dto.material;
 
 import dev.nerobeev.economic_cybernetics_system.domain.newv.IndustryCode;
 import dev.nerobeev.economic_cybernetics_system.domain.newv.Status;
-import dev.nerobeev.economic_cybernetics_system.domain.newv.measure.UnitOfMeasure;
+import dev.nerobeev.economic_cybernetics_system.domain.newv.UnitOfMeasure;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record MaterialCreateRequest(
+    Long id,
     String name,
-//    String uCode,
+    String uCode,
     UnitOfMeasure unit,
     BigDecimal costPerUnit,
     BigDecimal pricePerUnit,

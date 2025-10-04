@@ -1,13 +1,11 @@
 package dev.nerobeev.economic_cybernetics_system.utest.entity;
 
-import dev.nerobeev.economic_cybernetics_system.entity.Sector;
+import dev.nerobeev.economic_cybernetics_system.domain.newv.UnitOfMeasure;
 import dev.nerobeev.economic_cybernetics_system.entity.PlanIndicator;
 import dev.nerobeev.economic_cybernetics_system.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -22,16 +20,6 @@ class ProductTest {
     @BeforeEach
     void setup() {
         sector = new Sector("Деревообработка", "02", "Отрасль");
-        plank = new Product("Доска обрезная 40", "5 м", sector);
-        plan = PlanIndicator.builder()
-                .product(plank)
-                .planYear(2025)
-                .planQuarter(3)
-                .plannedOutput(new BigDecimal(1000))
-                .actualOutput(new BigDecimal(1030))
-                .build();
-
-        plank.getPlanIndicators().add(plan);
     }
 
     @Test
@@ -40,8 +28,7 @@ class ProductTest {
     void shouldCreateProductWithRelationships() {
         assertEquals("Доска обрезная 40", plank.getName());
         assertEquals("5 м", plank.getUnit());
-        assertEquals(sector, plank.getSector());
-        assertEquals(1,plank.getPlanIndicators().size());
+
     }
 
     @Test
@@ -49,20 +36,17 @@ class ProductTest {
     void shouldSupportBuilderPattern() {
         Product steel = Product.builder()
                 .name("Сталь")
-                .unit("тонн")
-                .sector(sector)
+                .unit(UnitOfMeasure.CUBIC_METER)
                 .build();
 
         assertEquals("Сталь", steel.getName());
         assertEquals("тонн", steel.getUnit());
-        assertEquals(sector, steel.getSector());
-        assertNotNull(steel.getPlanIndicators());
+
     }
 
     @Test
     @DisplayName("Should maintain plan indicator relationships")
     void shouldMaintainPlanIndicatorRelationships() {
-        assertEquals(plan, plank.getPlanIndicators().getFirst());
         assertEquals(plank, plan.getProduct());
     }
 
