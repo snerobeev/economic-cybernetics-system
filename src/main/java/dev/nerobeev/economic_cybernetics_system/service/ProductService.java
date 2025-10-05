@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.service.product;
+package dev.nerobeev.economic_cybernetics_system.service;
 
 import dev.nerobeev.economic_cybernetics_system.domain.newv.markerator.MarkingGenerator;
 import dev.nerobeev.economic_cybernetics_system.domain.newv.markerator.MarkingType;

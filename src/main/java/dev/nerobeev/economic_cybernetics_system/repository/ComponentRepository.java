@@ -1,12 +1,12 @@
 package dev.nerobeev.economic_cybernetics_system.repository;
 
-import dev.nerobeev.economic_cybernetics_system.entity.Product;
+import dev.nerobeev.economic_cybernetics_system.entity.Component;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
-    Optional<Product> findById(Long id);
+public interface ComponentRepository extends JpaRepository<Component, Long> {
+    Optional<Component> findById(Long id);
 }

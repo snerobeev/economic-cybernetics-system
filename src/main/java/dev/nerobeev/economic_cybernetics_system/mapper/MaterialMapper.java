@@ -7,14 +7,14 @@ import dev.nerobeev.economic_cybernetics_system.entity.Material;
 import org.mapstruct.*;
 
 @Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE,
-    uses = {JsonNullableMapper.class})
+        componentModel = MappingConstants.ComponentModel.SPRING,
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = {JsonNullableMapper.class})
 
 public interface MaterialMapper {
-  // Request DTO -> Entity (Запрос на создание нового материала)
-  Material toEntity(MaterialCreateRequest request, @Context MarkingGenerator generator);
+    // Request DTO -> Entity (Запрос на создание нового материала)
+    Material toEntity(MaterialCreateRequest request, @Context MarkingGenerator generator);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
@@ -29,12 +29,7 @@ public interface MaterialMapper {
     @Mapping(source = "planPeriod", target = "planPeriod")
     @Mapping(source = "productionDate", target = "productionDate")
     @Mapping(source = "strategic", target = "strategic")
-  MaterialResponse toResponse(Material material);
+    MaterialResponse toResponse(Material material);
 
-//  @AfterMapping
-//  default void assignCode(@MappingTarget Material material, @Context MarkingGenerator generator) {
-//    if(material.getCode() == null) {
-//      material.setCode(generator.generate(MarkingType.MATERIAL));
-//    }
-  }
+}
 

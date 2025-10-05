@@ -10,30 +10,26 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
+    import java.util.Set;
 
-/*
- ** JPA-сущность, представляющая готовый продукт,
- *  итог производственного процесса.
- */
 @Entity
-@Table(name = "products")
+@Table(name = "components")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class Product {
+public class Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
     @Size(min = 3, max = 50)
-    private String name; // Название продукта (например, "Смартфон")
+    private String name; // Название компонента (например, "SSD диск")
 
     @Column(unique = true)
-    private String uCode; // Уникальная маркировка: PRD-20251003-001
+    private String uCode; // Уникальная маркировка: CMP-20251003-001
 
     @Enumerated(EnumType.STRING)
     private UnitOfMeasure unit; // Единица измерения: шт, тн, м²
@@ -54,7 +50,7 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Status status; // Статус: PRODUCT, EXPORTED_PRODUCT и т.д.
 
-    @Column(unique = true)
+    @Column
     @Enumerated(EnumType.STRING)
     private IndustryCode industryCode; // Код отрасли (например, ОКВЭД)
 
@@ -68,17 +64,23 @@ public class Product {
     @Column
     private Boolean strategic; // Является ли продукт стратегическим
 
-    @OneToMany()
-    private List<Material> materials;
+    @OneToMany
+    @JoinTable(name = "component_products",
+            joinColumns = @JoinColumn(name = "component_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Product> products; // В каких продуктах используется Компонент
 
     @OneToMany
-    private List<Component> components;
+    @JoinTable(name = "component_materials",
+            joinColumns = @JoinColumn(name = "component_id"),
+            inverseJoinColumns = @JoinColumn(name = "material_id"))
+
+    private Set<Material> materials; // Какие материалы используются в Компоненте
 
     // Конструктор для тестов
-    public Product(String name, UnitOfMeasure unit) {
+    public Component(String name, String supplier, BigDecimal costPerUnit) {
         this.name = name;
-        this.unit = unit;
-
+        this.producer = supplier;
+        this.costPerUnit = costPerUnit;
     }
 }
-

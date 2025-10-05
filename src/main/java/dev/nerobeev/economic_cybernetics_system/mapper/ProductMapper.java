@@ -1,7 +1,6 @@
 package dev.nerobeev.economic_cybernetics_system.mapper;
 
 import dev.nerobeev.economic_cybernetics_system.domain.newv.markerator.MarkingGenerator;
-import dev.nerobeev.economic_cybernetics_system.domain.newv.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.Product;
@@ -22,7 +21,7 @@ public interface ProductMapper {
   // Entity -> Response DTO (Ответ клиенту)
   @Mapping(source = "id", target = "id")
   @Mapping(source = "name", target = "name")
-  @Mapping(source = "uCode", target = "uCode")
+//  @Mapping(source = "uCode", target = "uCode")
   @Mapping(source = "unit", target = "unit")
   @Mapping(source = "costPerUnit", target = "costPerUnit")
   @Mapping(source = "pricePerUnit", target = "pricePerUnit")

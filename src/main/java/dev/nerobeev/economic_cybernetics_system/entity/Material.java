@@ -27,7 +27,7 @@ public class Material {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(unique = true)
+    @Column
     @Size(min = 3, max = 50)
     public String name; // Название материала (например, "Сталь")
 
@@ -37,37 +37,38 @@ public class Material {
     @Enumerated(EnumType.STRING)
     public UnitOfMeasure unit; // Единица измерения: шт, тн, м²
 
-    @Column(unique = true)
+    @Column
     public BigDecimal costPerUnit;  // Себестоимость единицы
 
-    @Column(unique = true)
+    @Column
     public BigDecimal pricePerUnit; // Цена реализации (если отличается)
 
-    @Column(unique = true)
+    @Column
     @Size(min = 3, max = 50)
     public String producer; // Производитель
 
-    @Column(unique = true)
+    @Column
     public BigDecimal quantity;  // Объём выпуска
 
     @Enumerated(EnumType.STRING)
     public Status status; // Статус: PRODUCT, EXPORTED_PRODUCT и т.д.
 
-    @Column(unique = true)
+    @Column
     @Enumerated(EnumType.STRING)
     public IndustryCode industryCode; // Код отрасли (например, ОКВЭД)
 
-    @Column(unique = true)
+    @Column
     public String planPeriod; // Отражает временной интервал
 
-    @Column(unique = true)
+    @Column
     @PastOrPresent
     public LocalDate productionDate; // Дата производства
 
-    @Column(unique = true)
+    @Column
     public Boolean strategic; // Является ли продукт стратегическим
 
-    @Column(unique = true)
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     public Product product; // В каком продукте используется
 
     // Конструктор для тестов
