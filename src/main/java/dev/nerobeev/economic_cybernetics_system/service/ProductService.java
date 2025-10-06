@@ -1,7 +1,7 @@
 package dev.nerobeev.economic_cybernetics_system.service;
 
-import dev.nerobeev.economic_cybernetics_system.domain.newv.markerator.MarkingGenerator;
-import dev.nerobeev.economic_cybernetics_system.domain.newv.markerator.MarkingType;
+import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingGenerator;
+import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;
 import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundException;

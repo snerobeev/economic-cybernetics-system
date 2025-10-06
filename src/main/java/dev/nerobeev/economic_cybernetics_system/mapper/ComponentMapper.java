@@ -1,11 +1,9 @@
 package dev.nerobeev.economic_cybernetics_system.mapper;
 
-import dev.nerobeev.economic_cybernetics_system.domain.newv.markerator.MarkingGenerator;
+import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingGenerator;
 import dev.nerobeev.economic_cybernetics_system.dto.component.ComponentCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.component.ComponentResponse;
-import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.entity.Component;
-import dev.nerobeev.economic_cybernetics_system.entity.Material;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

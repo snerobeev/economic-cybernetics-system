@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.domain.newv.markerator;
+package dev.nerobeev.economic_cybernetics_system.domain.markerator;
 
 
 public enum MarkingType {

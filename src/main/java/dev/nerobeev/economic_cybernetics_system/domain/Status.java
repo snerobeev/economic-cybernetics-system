@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.domain.newv;
+package dev.nerobeev.economic_cybernetics_system.domain;
 
 public enum Status {
   RAW,                // Материал

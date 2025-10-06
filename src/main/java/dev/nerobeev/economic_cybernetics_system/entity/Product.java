@@ -1,8 +1,8 @@
 package dev.nerobeev.economic_cybernetics_system.entity;
 
-import dev.nerobeev.economic_cybernetics_system.domain.newv.IndustryCode;
-import dev.nerobeev.economic_cybernetics_system.domain.newv.Status;
-import dev.nerobeev.economic_cybernetics_system.domain.newv.UnitOfMeasure;
+import dev.nerobeev.economic_cybernetics_system.domain.IndustryCode;
+import dev.nerobeev.economic_cybernetics_system.domain.Status;
+import dev.nerobeev.economic_cybernetics_system.domain.UnitOfMeasure;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
