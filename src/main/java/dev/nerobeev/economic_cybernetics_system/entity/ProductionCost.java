@@ -12,10 +12,12 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Builder
-public abstract class Enterprise {
+public class ProductionCost {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @Column(nullable = false)
+  private String name;
   @Column()
   private BigDecimal energyCost;           // Стоимость энергии
   @Column()
