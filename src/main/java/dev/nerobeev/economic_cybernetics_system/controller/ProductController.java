@@ -18,6 +18,12 @@ public class ProductController {
 
   private final ProductService productService;
 
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public ProductResponse createProduct(@RequestBody @Valid ProductCreateRequest request) {
+    return productService.createProduct(request);
+  }
+
   @GetMapping
   public ResponseEntity<List<ProductResponse>> getAllProducts() {
     var products = productService.getAllProducts();
@@ -27,12 +33,6 @@ public class ProductController {
   @GetMapping("/{id}")
   public ProductResponse getProductById(@PathVariable Long id) {
     return productService.getProductById(id);
-  }
-
-  @PostMapping
-  @ResponseStatus(HttpStatus.CREATED)
-  public ProductResponse createProduct(@RequestBody @Valid ProductCreateRequest request) {
-    return productService.createProduct(request);
   }
 
 }
