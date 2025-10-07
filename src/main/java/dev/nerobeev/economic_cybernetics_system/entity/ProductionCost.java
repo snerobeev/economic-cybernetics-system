@@ -21,7 +21,7 @@ public class ProductionCost {
   @Column()
   private BigDecimal energyCost;           // Стоимость энергии
   @Column()
-  private BigDecimal laborHours;           // Человеко-часы
+  private BigDecimal laborHours;           // Зарплата
   @Column()
   private BigDecimal equipmentCost;        // Стоимость оборудования
   @Column()

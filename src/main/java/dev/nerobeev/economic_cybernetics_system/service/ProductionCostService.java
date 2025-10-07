@@ -1,6 +1,5 @@
 package dev.nerobeev.economic_cybernetics_system.service;
 
-import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.quarry.ProductionCostCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.quarry.ProductionCostResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.ProductionCost;
@@ -13,20 +12,26 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 @Getter
 @Setter
 @Builder
+@RequiredArgsConstructor
 public class ProductionCostService {
 
-  private final ProductionCostRepository productionCostRepository;
-  private final ProductionCostMapper productionCostMapper;
+    private final ProductionCostMapper productionCostMapper;
+    private final ProductionCostRepository productionCostRepository;
 
-  public ProductionCostResponse createProductionCost(ProductionCostCreateRequest request) {
-    var productionCost = productionCostMapper.toEntity(request);
-    var savedProductionCost = productionCostRepository.save(productionCost);
-    return productionCostMapper.toResponse(savedProductionCost);
-  }
+    public ProductionCostResponse createProductionCost(ProductionCostCreateRequest request) {
+        var productionCost = productionCostMapper.toEntity(request);
+        var savedProductionCost = productionCostRepository.save(productionCost);
+        return productionCostMapper.toResponse(savedProductionCost);
+    }
 
-
+    public ProductionCostResponse getTotalCost(ProductionCostCreateRequest request) {
+        var energy = productionCostRepository.findProductionCost(request.energyCost());
+        var equipment = productionCostRepository.findProductionCost(request.equipmentCost());
+        var labor = productionCostRepository.findProductionCost(request.laborHours());
+//        var result = energy + equipment + labor;
+       return null;
+    }
 }
