@@ -35,7 +35,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.openapitools:jackson-databind-nullable:0.2.7")
-    implementation("org.postgresql:postgresql")
+    implementation("org.postgresql:postgresql:42.7.8")
     implementation("org.flywaydb:flyway-core:11.13.3")
     implementation("org.flywaydb:flyway-database-postgresql")
 

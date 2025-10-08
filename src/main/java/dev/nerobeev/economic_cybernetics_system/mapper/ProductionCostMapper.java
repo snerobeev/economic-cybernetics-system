@@ -1,7 +1,7 @@
 package dev.nerobeev.economic_cybernetics_system.mapper;
 
-import dev.nerobeev.economic_cybernetics_system.dto.quarry.ProductionCostCreateRequest;
-import dev.nerobeev.economic_cybernetics_system.dto.quarry.ProductionCostResponse;
+import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostCreateRequest;
+import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.ProductionCost;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
