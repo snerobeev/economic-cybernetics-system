@@ -35,6 +35,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.openapitools:jackson-databind-nullable:0.2.7")
+    implementation("org.postgresql:postgresql")
+    implementation("org.flywaydb:flyway-core:11.13.3")
+    implementation("org.flywaydb:flyway-database-postgresql")
 
     // MapStruct - ИСПРАВЛЕНО: добавлена версия
     implementation("org.mapstruct:mapstruct:${property("mapstructVersion")}")
@@ -44,7 +47,8 @@ dependencies {
 
     // Development tools
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("com.h2database:h2")
+    // https://mvnrepository.com/artifact/org.flywaydb/flyway-database-postgresql
+    runtimeOnly("org.flywaydb:flyway-database-postgresql:11.13.3")
 
     // Lombok
     compileOnly("org.projectlombok:lombok:${property("lombokVersion")}")
@@ -61,10 +65,12 @@ dependencies {
 
 // ДОБАВЛЕНО: Настройка компиляции для MapStruct + Lombok
 tasks.withType<JavaCompile> {
-    options.compilerArgs.addAll(listOf(
-        "-Amapstruct.defaultComponentModel=spring",
-        "-Amapstruct.unmappedTargetPolicy=IGNORE"
-    ))
+    options.compilerArgs.addAll(
+        listOf(
+            "-Amapstruct.defaultComponentModel=spring",
+            "-Amapstruct.unmappedTargetPolicy=IGNORE"
+        )
+    )
 }
 
 tasks.withType<Test> {

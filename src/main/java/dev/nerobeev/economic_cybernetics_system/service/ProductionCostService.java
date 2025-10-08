@@ -28,10 +28,8 @@ public class ProductionCostService {
     }
 
     public ProductionCostResponse getTotalCost(ProductionCostCreateRequest request) {
-        var energy = productionCostRepository.findProductionCost(request.energyCost());
-        var equipment = productionCostRepository.findProductionCost(request.equipmentCost());
-        var labor = productionCostRepository.findProductionCost(request.laborHours());
-//        var result = energy + equipment + labor;
+        var energy = productionCostRepository.findByEnergyCost(request.energyCost());
+
        return null;
     }
 }
