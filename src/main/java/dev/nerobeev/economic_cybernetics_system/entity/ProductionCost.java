@@ -16,41 +16,59 @@ public class ProductionCost {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Column(nullable = false)
+
+  @Column(name = "name", nullable = false)
   private String name;
-  @Column()
+
+  @Column(name = "energy_cost")
   private BigDecimal energyCost;           // Стоимость энергии
-  @Column()
+
+  @Column(name = "labor_hours")
   private BigDecimal laborHours;           // Зарплата
-  @Column()
+
+  @Column(name = "equipment_cost")
   private BigDecimal equipmentCost;        // Стоимость оборудования
-  @Column()
+
+  @Column(name = "material_cost")
   private BigDecimal materialCost;         // Стоимость расходных материалов
-  @Column()
+
+  @Column(name = "logistics_cost")
   private BigDecimal logisticsCost;        // Стоимость доставки
-  @Column()
+
+  @Column(name = "license_cost")
   private BigDecimal licenseCost;          // Стоимость лицензий
-  @Column()
+
+  @Column(name = "tax_cost")
   private BigDecimal taxCost;              // Налоги
-  @Column()
+
+  @Column(name = "social_cost")
   private BigDecimal socialCost;           // Социальные выплаты
-  @Column()
+
+  @Column(name = "amortization_cost")
   private BigDecimal amortizationCost;     // Амортизация
 
+  @Column(name = "equipment_maintenance_cost")
   private BigDecimal equipmentMaintenanceCost; // Обслуживание оборудования
 
+  @Column(name = "administrative_cost")
   private BigDecimal administrativeCost;   // Административные расходы
 
+  @Column(name = "rental_cost")
   private BigDecimal rentalCost;           // Аренда
 
+  @Column(name = "communication_cost")
   private BigDecimal communicationCost;    // Связь
 
+  @Column(name = "insurance_cost")
   private BigDecimal insuranceCost;        // Страхование
 
+  @Column(name = "research_and_development_cost")
   private BigDecimal researchAndDevelopmentCost; // НИОКР
 
+  @Column(name = "interest_cost")
   private BigDecimal interestCost;         // Кредиты и займы, расходы на маркетинг
 
+  @Column(name = "eco_cost")
   private BigDecimal ecoCost;              // Экологический сбор
 
 }

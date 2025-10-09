@@ -20,4 +20,5 @@ public class ProductionCostController {
   public ProductionCostResponse createProductionCost(@Valid @RequestBody ProductionCostCreateRequest request) {
     return productionCostService.createProductionCost(request);
   }
+
 }
