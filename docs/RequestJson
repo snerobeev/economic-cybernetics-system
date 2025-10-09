@@ -1,41 +1,45 @@
-{
-  "name": "Смартфон 'Эра'",
-  "unit": "PIECE",
-  "costPerUnit": 45000.00,
-  "pricePerUnit": 75000.00,
-  "producer": "Алмаз-Техно",
-  "quantity": 5000,
-  "status": "PRODUCT",
-  "industryCode": "MANUFACTURING",
-  "planPeriod": "2026-Q1",
-  "productionDate": "2025-10-01",
-  "strategic": true
-}
+--Material--
 
 {
-  "name": "Песок кварцевый строительный",
-  "unit": "TON",
-  "costPerUnit": 850.50,
-  "pricePerUnit": 0.00,
-  "producer": "Карьер 'Восток'",
-  "quantity": 100000,
-  "status": "RAW",
-  "industryCode": "MINING",
-  "planPeriod": "2025-Q4",
-  "productionDate": "2025-09-15",
+  "name": "Интегральный чипсет D-700",
+  "uCode": "MAT-20251009-CHIP700",
+  "unit": "PCS",
+  "costPerUnit": 8500.50,
+  "pricePerUnit": 12999.00,
+  "producer": "Robo Assembly Inc.",
+  "quantity": 100.00,
+  "status": "PRODUCT",
+  "industryCode": "MANUFACTURING",
+  "planPeriod": "Q4-2025",
+  "productionDate": "2025-10-08",
   "strategic": false
 }
 
 {
-  "name": "Сверло SMT-v3",
+  "name": "Песок кварцевый для фильтрации",
+  "uCode": "MAT-20251009-QZFLT",
+  "unit": "TON",
+  "costPerUnit": 850.75,
+  "pricePerUnit": 1100.00,
+  "producer": "Mining Siberia Co.",
+  "quantity": 5000.00,
+  "status": "RAW",
+  "industryCode": "MINING",
+  "planPeriod": "2025-Q4",
+  "productionDate": "2025-10-01",
+  "strategic": false
+}
+{
+  "name": "Сталь легированная марки Х12МФ (лист 5мм)",
+  "uCode": "MAT-20251009-STL12MF",
   "unit": "PCS",
-  "costPerUnit": 15000.75,
-  "pricePerUnit": 16500.00,
-  "producer": "Алмаз-Компонент",
-  "quantity": 7500,
-  "status": "IN_PROCESS",
+  "costPerUnit": 15500.00,
+  "pricePerUnit": 21000.00,
+  "producer": "SteelPro Group",
+  "quantity": 50.00,
+  "status": "PRODUCT",
   "industryCode": "MANUFACTURING",
   "planPeriod": "2025-Q4",
-  "productionDate": "2025-10-05",
+  "productionDate": "2025-10-09",
   "strategic": true
 }
