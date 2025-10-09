@@ -8,4 +8,5 @@ import java.util.Optional;
 @Repository
 public interface MaterialRepository extends JpaRepository<Material,Long> {
   Optional<Material> findMaterialByName(String name);
+  Optional<Material> findMaterialById(Long id);
 }

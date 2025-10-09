@@ -69,10 +69,6 @@ public class Material {
   @Column(nullable = false)
   private Boolean strategic; // Является ли продукт стратегическим
 
-  @ManyToOne
-  @JoinColumn(name = "product_id")
-  private Product product; // todo В каком продукте используется
-
   // Конструктор для тестов
   public Material(String name, String supplier, BigDecimal costPerUnit) {
     this.name = name;

@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface ProductionCostRepository extends JpaRepository<ProductionCost,Long> {
-  Optional<ProductionCost>findProductionCostById(Long id);
+  Optional<ProductionCost>findById(Long id);
   Optional<ProductionCost>findByEnergyCost(BigDecimal energyCost);
 }

@@ -8,10 +8,12 @@ import dev.nerobeev.economic_cybernetics_system.exeption.MaterialNotFoundExcepti
 import dev.nerobeev.economic_cybernetics_system.mapper.MaterialMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.MaterialRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MaterialService {
@@ -23,22 +25,28 @@ public class MaterialService {
 
     var material = materialMapper.toEntity(request, markingGenerator);
     material.setUCode(markingGenerator.generate(MarkingType.MATERIAL));
-    var materialName = request.name(); // todo how to equals material?
     var savedMaterial = materialRepository.save(material);
-
+    log.info("Material with ID: {}", material.getId() + " created");
     return materialMapper.toResponse(savedMaterial);
   }
 
-  public List<MaterialResponse> getAllMaterials(){
+  public List<MaterialResponse> getAllMaterials() {
     return materialRepository.findAll().stream()
-        .map(materialMapper::toResponse)
-        .toList();
+                             .map(materialMapper::toResponse)
+                             .toList();
   }
 
-  public MaterialResponse getMaterialByName(String name){
-    var material = materialRepository.findMaterialByName(name)
-        .orElseThrow(()-> new MaterialNotFoundException(name));
+  public MaterialResponse getMaterialById(Long id) {
+    var material = materialRepository.findMaterialById(id)
+                                     .orElseThrow(() -> new MaterialNotFoundException(id));
     return materialMapper.toResponse(material);
+  }
+
+  public void deleteMaterial(Long id) {
+    var material = materialRepository.findMaterialById(id)
+        .orElseThrow(()-> new MaterialNotFoundException(id));
+    materialRepository.delete(material);
+    log.info("Material with id: {}", material.getId() + " deleted");
   }
 
 }

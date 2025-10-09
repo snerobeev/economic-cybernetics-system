@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND) //todo <-- правильно ли так делать?
 public class MaterialNotFoundException extends RuntimeException {
-  public MaterialNotFoundException(String name) {
+  public MaterialNotFoundException(Long id) {
 
-    super("Материал с именем " + name + " не найден");
+    super("Material with ID " + id + " not found");
   }
 }
