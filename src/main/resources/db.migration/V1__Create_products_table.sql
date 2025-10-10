@@ -5,7 +5,7 @@
 CREATE TABLE products (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    u_code VARCHAR(255) UNIQUE,
+    ucode VARCHAR(255) UNIQUE,
     unit VARCHAR(50) NOT NULL,
     cost_per_unit DECIMAL(19, 2),
     price_per_unit DECIMAL(19, 2),

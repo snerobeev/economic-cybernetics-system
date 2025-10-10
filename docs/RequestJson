@@ -2,7 +2,6 @@
 
 {
   "name": "Интегральный чипсет D-700",
-  "uCode": "MAT-20251009-CHIP700",
   "unit": "PCS",
   "costPerUnit": 8500.50,
   "pricePerUnit": 12999.00,
@@ -17,7 +16,6 @@
 
 {
   "name": "Песок кварцевый для фильтрации",
-  "uCode": "MAT-20251009-QZFLT",
   "unit": "TON",
   "costPerUnit": 850.75,
   "pricePerUnit": 1100.00,
@@ -29,9 +27,9 @@
   "productionDate": "2025-10-01",
   "strategic": false
 }
+
 {
   "name": "Сталь легированная марки Х12МФ (лист 5мм)",
-  "uCode": "MAT-20251009-STL12MF",
   "unit": "PCS",
   "costPerUnit": 15500.00,
   "pricePerUnit": 21000.00,
@@ -42,4 +40,44 @@
   "planPeriod": "2025-Q4",
   "productionDate": "2025-10-09",
   "strategic": true
+}
+
+--Component--
+
+{
+  "name": "SSD NVMe 512GB",
+  "uCode": "CMP-20251010-SSD512",
+  "unit": "PCS",
+  "costPerUnit": 4500.00,
+  "pricePerUnit": 6500.00,
+  "producer": "TechStorage Corp.",
+  "quantity": 250.00,
+  "status": "PRODUCT",
+  "industryCode": "MANUFACTURING",
+  "planPeriod": "2025-Q4",
+  "productionDate": "2025-10-05",
+  "strategic": true,
+
+  "materials": [
+    { "id": 1 },
+    { "id": 2 }
+  ]
+}
+
+{
+  "name": "Корпус литой алюминиевый",
+  "uCode": "CMP-20251010-ALCAST",
+  "unit": "PCS",
+  "costPerUnit": 850.50,
+  "pricePerUnit": 1020.00,
+  "producer": "AluForming LLC",
+  "quantity": 1500.00,
+  "status": "INTERMEDIATE",
+  "industryCode": "MACHINERY",
+  "planPeriod": "2025-Q4",
+  "productionDate": "2025-09-28",
+  "strategic": false,
+
+  "materials": []
+
 }

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
-public record ComponentCreateRequest(
+public record ComponentCreateRequest( //todo @Validation
         String name,
         UnitOfMeasure unit,
         BigDecimal costPerUnit,

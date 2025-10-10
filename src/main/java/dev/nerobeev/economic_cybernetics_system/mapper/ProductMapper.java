@@ -19,20 +19,6 @@ public interface ProductMapper {
   Product toEntity(ProductCreateRequest request,@Context MarkingGenerator generator);
 
   // Entity -> Response DTO (Ответ клиенту)
-  @Mapping(source = "id", target = "id")
-  @Mapping(source = "name", target = "name")
-//  @Mapping(source = "uCode", target = "uCode")
-  @Mapping(source = "unit", target = "unit")
-  @Mapping(source = "costPerUnit", target = "costPerUnit")
-  @Mapping(source = "pricePerUnit", target = "pricePerUnit")
-  @Mapping(source = "producer", target = "producer")
-  @Mapping(source = "quantity", target = "quantity")
-  @Mapping(source = "status", target = "status")
-  @Mapping(source = "industryCode", target = "industryCode")
-  @Mapping(source = "planPeriod", target = "planPeriod")
-  @Mapping(source = "productionDate", target = "productionDate")
-  @Mapping(source = "strategic", target = "strategic")
-  @Mapping(source = "materials", target = "materials")
   ProductResponse toResponse(Product product);
 
 }

@@ -26,66 +26,67 @@ import java.util.Set;
 @Setter
 @Builder
 public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(name = "name")
-    @Size(min = 3, max = 50)
-    @NotNull
-    private String name; // Название продукта (например, "Смартфон")
+  @Column(name = "name")
+  @Size(min = 3, max = 50)
+  @NotNull
+  private String name; // Название продукта (например, "Смартфон")
 
-    @Column(name = "u_code")
-    private String uCode; // Уникальная маркировка: PRD-20251003-001
+  @Column(name = "u_code")
+  private String uCode; // Уникальная маркировка: PRD-20251003-001
 
-    @Column(name = "unit")
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private UnitOfMeasure unit; // Единица измерения: шт, тн, м²
+  @Column(name = "unit")
+  @NotNull
+  @Enumerated(EnumType.STRING)
+  private UnitOfMeasure unit; // Единица измерения: шт, тн, м²
 
-    @Column(name = "cost_per_unit")
-    private BigDecimal costPerUnit;  // Себестоимость единицы
+  @Column(name = "cost_per_unit")
+  private BigDecimal costPerUnit;  // Себестоимость единицы
 
-    @Column(name = "price_per_unit")
-    private BigDecimal pricePerUnit; // Цена реализации (если отличается)
+  @Column(name = "price_per_unit")
+  private BigDecimal pricePerUnit; // Цена реализации (если отличается)
 
-    @Column(name = "producer")
-    @Size(min = 3, max = 50)
-    private String producer; // Производитель
+  @Column(name = "producer")
+  @Size(min = 3, max = 50)
+  private String producer; // Производитель
 
-    @Column(name = "quantity")
-    private BigDecimal quantity;  // Объём выпуска
+  @Column(name = "quantity")
+  private BigDecimal quantity;  // Объём выпуска
 
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
-    private Status status; // Статус: PRODUCT, EXPORTED_PRODUCT и т.д.
+  @Column(name = "status")
+  @Enumerated(EnumType.STRING)
+  private Status status; // Статус: PRODUCT, EXPORTED_PRODUCT и т.д.
 
-    @Column(name = "industry_code")
-    @Enumerated(EnumType.STRING)
-    private IndustryCode industryCode; // Код отрасли (например, ОКВЭД)
+  @Column(name = "industry_code")
+  @Enumerated(EnumType.STRING)
+  private IndustryCode industryCode; // Код отрасли (например, ОКВЭД)
 
-    @Column(name = "plan_period")
-    private String planPeriod; // Отражает временной интервал
+  @Column(name = "plan_period")
+  private String planPeriod; // Отражает временной интервал
 
-    @Column(name = "production_date")
-    @PastOrPresent
-    private LocalDate productionDate; // Дата производства
+  @Column(name = "production_date")
+  @PastOrPresent
+  private LocalDate productionDate; // Дата производства
 
-    @Column(name = "strategic")
-    @NotNull
-    private Boolean strategic; // Является ли продукт стратегическим
+  @Column(name = "strategic")
+  @NotNull
+  private Boolean strategic; // Является ли продукт стратегическим
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Material> materials;
+  @ManyToMany
+  @JoinTable(
+      name = "product_components", // Имя соединительной таблицы
+      joinColumns = @JoinColumn(name = "product_id"),
+      inverseJoinColumns = @JoinColumn(name = "component_id")
+  )
+  private Set<Component> components;
 
-    @OneToMany
-    private Set<Component> components;
-
-    // Конструктор для тестов
-    public Product(String name, UnitOfMeasure unit) {
-        this.name = name;
-        this.unit = unit;
-
-    }
+  // Конструктор для тестов
+  public Product(String name, UnitOfMeasure unit) {
+    this.name = name;
+    this.unit = unit;
+  }
 }
 

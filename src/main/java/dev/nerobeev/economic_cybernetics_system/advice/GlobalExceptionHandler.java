@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -23,19 +24,19 @@ import java.time.format.DateTimeFormatter;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler implements FormatTimeStamp {
 
   @Override
-  public String formatTimeStamp(Instant instant) {
+  public String formatTimeStamp(Instant instant) { // todo Jakson config
     LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of("UTC"));
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     return localDateTime.format(formatter);
   }
 
+  @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler({ProductNotFoundException.class, MaterialAlreadyExistsException.class})
-  public ResponseEntity<ErrorMessageResponse> handleProductNotFound(RuntimeException exception) {
-
+  public ErrorMessageResponse handleProductNotFound(RuntimeException exception) {
     log.error("Create Product operation error: {}", exception.getMessage(), exception);
     var formattedTime = formatTimeStamp(Instant.now());
-    return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                         .body(new ErrorMessageResponse(exception.getMessage(), formattedTime));
+    return new ErrorMessageResponse(exception.getMessage(), formattedTime);
+
   }
 
   @ExceptionHandler(DataIntegrityViolationException.class)

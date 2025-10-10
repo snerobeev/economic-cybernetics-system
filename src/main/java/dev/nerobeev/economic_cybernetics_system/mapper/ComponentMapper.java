@@ -4,18 +4,20 @@ import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingGenerat
 import dev.nerobeev.economic_cybernetics_system.dto.component.ComponentCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.component.ComponentResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.Component;
-import org.mapstruct.Context;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
-@Mapper(componentModel = "spring", uses = {MaterialMapper.class, ProductMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = {MaterialMapper.class, ProductMapper.class,JsonNullableMapper.class})
+
 public interface ComponentMapper {
 
     // Request DTO -> Entity (Запрос на создание нового материала)
     Component toEntity(ComponentCreateRequest request, @Context MarkingGenerator generator);
 
     @Mapping(source = "materials", target = "materials")
-    @Mapping(source = "products", target = "products")
+    @Mapping(source = "UCode", target = "uCode")
     ComponentResponse toResponse(Component component);
 
 }

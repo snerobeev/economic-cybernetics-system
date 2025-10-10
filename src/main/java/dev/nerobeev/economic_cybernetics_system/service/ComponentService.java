@@ -23,7 +23,7 @@ public class ComponentService {
     var component = componentMapper.toEntity(createRequest, markingGenerator);
     component.setUCode(markingGenerator.generate(MarkingType.COMPONENT));
     var savedComponent = componentRepository.save(component);
-    return componentMapper.toResponse(savedComponent);//todo CREATED 201
+    return componentMapper.toResponse(savedComponent);
   }
 
   public List<ComponentResponse> getAllComponents() {

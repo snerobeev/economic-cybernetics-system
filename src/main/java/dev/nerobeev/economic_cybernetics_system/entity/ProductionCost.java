@@ -1,6 +1,7 @@
 package dev.nerobeev.economic_cybernetics_system.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -17,39 +18,50 @@ public class ProductionCost {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @NotNull
   @Column(name = "name", nullable = false)
   private String name;
 
+  @NotNull
   @Column(name = "energy_cost")
   private BigDecimal energyCost;           // Стоимость энергии
 
+  @NotNull
   @Column(name = "labor_hours")
   private BigDecimal laborHours;           // Зарплата
 
+  @NotNull
   @Column(name = "equipment_cost")
   private BigDecimal equipmentCost;        // Стоимость оборудования
 
+  @NotNull
   @Column(name = "material_cost")
   private BigDecimal materialCost;         // Стоимость расходных материалов
 
   @Column(name = "logistics_cost")
   private BigDecimal logisticsCost;        // Стоимость доставки
 
+  @NotNull
   @Column(name = "license_cost")
   private BigDecimal licenseCost;          // Стоимость лицензий
 
+  @NotNull
   @Column(name = "tax_cost")
   private BigDecimal taxCost;              // Налоги
 
+  @NotNull
   @Column(name = "social_cost")
   private BigDecimal socialCost;           // Социальные выплаты
 
+  @NotNull
   @Column(name = "amortization_cost")
   private BigDecimal amortizationCost;     // Амортизация
 
+  @NotNull
   @Column(name = "equipment_maintenance_cost")
   private BigDecimal equipmentMaintenanceCost; // Обслуживание оборудования
 
+  @NotNull
   @Column(name = "administrative_cost")
   private BigDecimal administrativeCost;   // Административные расходы
 

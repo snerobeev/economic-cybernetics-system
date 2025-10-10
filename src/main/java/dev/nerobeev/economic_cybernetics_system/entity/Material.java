@@ -30,44 +30,51 @@ public class Material {
 
     @Column(nullable = false)
     @Size(min = 3, max = 50)
+    @NotNull
     private String name; // Название материала (например, "Сталь")
 
-    @Column(unique = true)
+    @Column(name = "ucode")
     private String uCode; // Уникальная маркировка: MAT-20251003-001
 
-    @Column(nullable = false)
+    @Column(name = "unit")
     @Enumerated(EnumType.STRING)
+    @NotNull
     private UnitOfMeasure unit; // Единица измерения: шт, тн, м²
 
-    @Column(nullable = false)
+    @Column(name = "cost_per_unit")
+    @NotNull
     private BigDecimal costPerUnit;  // Себестоимость единицы
 
-    @Column(nullable = false)
+    @Column(name = "price_per_unit")
+    @NotNull
     private BigDecimal pricePerUnit; // Цена реализации (если отличается)
 
-    @Column(nullable = false)
+    @Column(name = "producer")
     @Size(min = 3, max = 50)
+    @NotNull
     private String producer; // Производитель
 
-    @Column(nullable = false)
+    @Column(name = "quantity")
+    @NotNull
     private BigDecimal quantity;  // Объём выпуска
 
-    @Column(nullable = false)
+    @Column()
     @Enumerated(EnumType.STRING)
     private Status status; // Статус: PRODUCT, EXPORTED_PRODUCT и т.д.
 
-    @Column(nullable = false)
+    @Column(name = "industry_code")
     @Enumerated(EnumType.STRING)
+    @NotNull
     private IndustryCode industryCode; // Код отрасли (например, ОКВЭД)
 
     @Column(name = "plan_period")
     private String planPeriod; // Отражает временной интервал
 
-    @Column(nullable = false)
+    @Column(name = "production_date")
     @PastOrPresent
     private LocalDate productionDate; // Дата производства
 
-    @Column(nullable = false)
+    @Column(name = "strategic")
     @NotNull
     private Boolean strategic; // Является ли продукт стратегическим
 
