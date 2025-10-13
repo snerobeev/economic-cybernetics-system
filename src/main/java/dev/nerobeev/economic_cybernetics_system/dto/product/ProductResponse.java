@@ -5,7 +5,6 @@ import dev.nerobeev.economic_cybernetics_system.domain.Status;
 import dev.nerobeev.economic_cybernetics_system.domain.UnitOfMeasure;
 import dev.nerobeev.economic_cybernetics_system.entity.Material;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,10 +13,10 @@ public record ProductResponse(
         String name,
         String uCode,
         UnitOfMeasure unit,
-        BigDecimal costPerUnit,
-        BigDecimal pricePerUnit,
+        Long costPerUnit,
+        Long pricePerUnit,
         String producer,
-        BigDecimal quantity,
+        Long quantity,
         Status status,
         IndustryCode industryCode,
         String planPeriod,

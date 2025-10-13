@@ -9,9 +9,7 @@ import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 /*
@@ -35,7 +33,7 @@ public class Product {
   @NotNull
   private String name; // Название продукта (например, "Смартфон")
 
-  @Column(name = "u_code")
+  @Column(name = "ucode")
   private String uCode; // Уникальная маркировка: PRD-20251003-001
 
   @Column(name = "unit")
@@ -44,17 +42,17 @@ public class Product {
   private UnitOfMeasure unit; // Единица измерения: шт, тн, м²
 
   @Column(name = "cost_per_unit")
-  private BigDecimal costPerUnit;  // Себестоимость единицы
+  private Long costPerUnit;  // Себестоимость единицы
 
   @Column(name = "price_per_unit")
-  private BigDecimal pricePerUnit; // Цена реализации (если отличается)
+  private Long pricePerUnit; // Цена реализации (если отличается)
 
   @Column(name = "producer")
   @Size(min = 3, max = 50)
   private String producer; // Производитель
 
   @Column(name = "quantity")
-  private BigDecimal quantity;  // Объём выпуска
+  private Long quantity;  // Объём выпуска
 
   @Column(name = "status")
   @Enumerated(EnumType.STRING)

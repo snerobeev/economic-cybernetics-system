@@ -33,4 +33,10 @@ public class ComponentController {
     ).body(components);
   }
 
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteComponent(@PathVariable Long id) {
+    componentService.deleteComponent(id);
+  }
+
 }

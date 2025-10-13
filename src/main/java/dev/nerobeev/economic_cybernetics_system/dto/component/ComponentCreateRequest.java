@@ -5,22 +5,33 @@ import dev.nerobeev.economic_cybernetics_system.domain.Status;
 import dev.nerobeev.economic_cybernetics_system.domain.UnitOfMeasure;
 import dev.nerobeev.economic_cybernetics_system.entity.Material;
 import dev.nerobeev.economic_cybernetics_system.entity.Product;
+import jakarta.validation.constraints.NotNull;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
-public record ComponentCreateRequest( //todo @Validation
+public record ComponentCreateRequest(
+        @NotNull
         String name,
+        @NotNull
         UnitOfMeasure unit,
-        BigDecimal costPerUnit,
-        BigDecimal pricePerUnit,
+        @NotNull
+        Long costPerUnit,
+        @NotNull
+        Long pricePerUnit,
+        @NotNull
         String producer,
-        BigDecimal quantity,
+        @NotNull
+        Long quantity,
+        @NotNull
         Status status,
+        @NotNull
         IndustryCode industryCode,
+        @NotNull
         String planPeriod,
+        @NotNull
         LocalDate productionDate,
+        @NotNull
         Boolean strategic,
         Set<Product> products,
         Set<Material> materials

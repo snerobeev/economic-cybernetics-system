@@ -1,6 +1,5 @@
 package dev.nerobeev.economic_cybernetics_system.domain.cost;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /*
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 
 public class CostItem {
     private CostType type;
-    private BigDecimal amount;
+    private Long amount;
     private LocalDate date;
     // ...
 }

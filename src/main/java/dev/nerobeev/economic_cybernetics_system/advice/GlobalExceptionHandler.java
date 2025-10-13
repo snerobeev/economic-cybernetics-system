@@ -2,9 +2,7 @@ package dev.nerobeev.economic_cybernetics_system.advice;
 
 import dev.nerobeev.economic_cybernetics_system.dto.error.ErrorMessageResponse;
 import dev.nerobeev.economic_cybernetics_system.dto.error.FormatTimeStamp;
-import dev.nerobeev.economic_cybernetics_system.exeption.MaterialAlreadyExistsException;
-import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundException;
-import dev.nerobeev.economic_cybernetics_system.exeption.ProductionCostNotFoundException;
+import dev.nerobeev.economic_cybernetics_system.exeption.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -53,6 +51,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
   @ExceptionHandler({ProductionCostNotFoundException.class})
   public ResponseEntity<ErrorMessageResponse> handleProductionCostNotFound(RuntimeException exception) {
     log.warn("ProductCost found warn : {} ", exception.getMessage(), exception);
+    var formattedTime = formatTimeStamp(Instant.now());
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                         .body(new ErrorMessageResponse(exception.getMessage(), formattedTime));
+  }
+
+  @ExceptionHandler({ComponentNotFoundException.class})
+  public ResponseEntity<ErrorMessageResponse> handleComponentNotFound(RuntimeException exception) {
+    log.warn("Component found warn : {} ", exception.getMessage(), exception);
+    var formattedTime = formatTimeStamp(Instant.now());
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                         .body(new ErrorMessageResponse(exception.getMessage(), formattedTime));
+  }
+
+  @ExceptionHandler({MaterialNotFoundException.class})
+  public ResponseEntity<ErrorMessageResponse> handleMaterialNotFound(RuntimeException exception) {
+    log.warn("Material found warn : {} ", exception.getMessage(), exception);
     var formattedTime = formatTimeStamp(Instant.now());
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
                          .body(new ErrorMessageResponse(exception.getMessage(), formattedTime));

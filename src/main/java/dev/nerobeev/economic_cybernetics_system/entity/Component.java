@@ -9,7 +9,6 @@ import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -41,11 +40,11 @@ public class Component {
 
   @NotNull
   @Column(name = "cost_per_unit")
-  private BigDecimal costPerUnit;  // Себестоимость единицы
+  private Long costPerUnit;  // Себестоимость единицы
 
   @NotNull
   @Column(name = "price_rep_unit")
-  private BigDecimal pricePerUnit; // Цена реализации (если отличается)
+  private Long pricePerUnit; // Цена реализации (если отличается)
 
   @NotNull
   @Column(name = "producer")
@@ -53,7 +52,7 @@ public class Component {
   private String producer; // Производитель
 
   @Column(name = "quantity")
-  private BigDecimal quantity;  // Объём выпуска
+  private Long quantity;  // Объём выпуска
 
   @NotNull
   @Column(name = "status")
@@ -82,7 +81,7 @@ public class Component {
   private Set<Material> materials; // Какие материалы используются в Компоненте
 
   // Конструктор для тестов
-  public Component(String name, String supplier, BigDecimal costPerUnit) {
+  public Component(String name, String supplier, Long costPerUnit) {
     this.name = name;
     this.producer = supplier;
     this.costPerUnit = costPerUnit;
