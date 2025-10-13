@@ -25,8 +25,8 @@ erDiagram
         BIGINT product_id FK
         INTEGER plan_year
         INTEGER plan_quarter
-        DECIMAL planned_output
-        DECIMAL actual_output
+        BIGINT planned_output
+        BIGINT actual_output
         TIMESTAMP created_at
     }
     
@@ -119,7 +119,7 @@ spring:
 ```yaml
 economic-cybernetics:
   matrix:
-    precision: 6           # Decimal places for matrix calculations
+    precision: 6           # BIGINT places for matrix calculations
     max-iterations: 1000   # Convergence limit for iterative algorithms
   planning:
     default-quarters: 4    # Standard planning horizon

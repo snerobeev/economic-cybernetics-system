@@ -8,13 +8,13 @@ CREATE TABLE components (
     name VARCHAR(50) NOT NULL,
     ucode VARCHAR(255) NOT NULL UNIQUE,
     unit VARCHAR(50) NOT NULL,
-    cost_per_unit DECIMAL(19, 2) NOT NULL,
-    price_rep_unit DECIMAL(19, 2) NOT NULL,
+    cost_per_unit BIGINT NOT NULL,
+    price_rep_unit BIGINT NOT NULL,
     producer VARCHAR(50) NOT NULL,
-    quantity DECIMAL(19, 2) NOT NULL,
+    quantity BIGINT NOT NULL,
     status VARCHAR(50) NOT NULL,
     industry_code VARCHAR(50),
     plan_period VARCHAR(255),
     production_date DATE,
-    strategic BOOLEAN
+    strategic BOOLEAN NOT NULL
 );

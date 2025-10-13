@@ -66,18 +66,56 @@
 
 {
   "name": "Корпус литой алюминиевый",
-  "uCode": "CMP-20251010-ALCAST",
   "unit": "PCS",
   "costPerUnit": 850.50,
   "pricePerUnit": 1020.00,
   "producer": "AluForming LLC",
   "quantity": 1500.00,
-  "status": "INTERMEDIATE",
-  "industryCode": "MACHINERY",
+  "status": "COMPONENT",
+  "industryCode": "TRADE",
   "planPeriod": "2025-Q4",
   "productionDate": "2025-09-28",
   "strategic": false,
 
-  "materials": []
+  "materials": [],
+  "products": []
+}
 
+{
+  "name": "Материнская плата Texas Instr EW34T",
+  "unit": "PCS",
+  "costPerUnit": 50,
+  "pricePerUnit": 102,
+  "producer": "Texas Inc",
+  "quantity": 500.00,
+  "status": "EXPORTED_PRODUCT",
+  "industryCode": "TRADE",
+  "planPeriod": "2025-Q4",
+  "productionDate": "2025-09-28",
+  "strategic": true,
+
+  "materials": [],
+  "products": []
+}
+
+--Component--
+
+{
+  "energyCost": 150,
+  "laborHours": 320,
+  "equipmentCost": 80,
+  "materialCost": 50,
+  "licenseCost": 50,
+  "taxCost": 25,
+  "socialCost": 45,
+  "amortizationCost": 12,
+  "equipmentMaintenanceCost": 30,
+  "administrativeCost": 60,
+  "logisticsCost": 75,
+  "rentalCost": 35,
+  "communicationCost": 12,
+  "insuranceCost": 20,
+  "researchAndDevelopmentCost": 0,
+  "interestCost": 40,
+  "ecoCost": 5
 }

@@ -6,7 +6,21 @@ public record ProductionCostResponse(
     String name,
     Long energyCost,
     Long laborHours,
-    Long equipmentCost
+    Long equipmentCost,
+    Long materialCost,
+    Long logisticsCost,
+    Long licenseCost,
+    Long taxCost,
+    Long socialCost,
+    Long amortizationCost,
+    Long equipmentMaintenanceCost,
+    Long administrativeCost,
+    Long rentalCost,
+    Long communicationCost,
+    Long insuranceCost,
+    Long researchAndDevelopmentCost,
+    Long interestCost,
+    Long ecoCost
 
 ) {
 }
