@@ -61,6 +61,9 @@ dependencies {
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    runtimeOnly("com.h2database:h2")
+
 }
 
 // ДОБАВЛЕНО: Настройка компиляции для MapStruct + Lombok
