@@ -47,7 +47,6 @@ dependencies {
 
     // Development tools
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    // https://mvnrepository.com/artifact/org.flywaydb/flyway-database-postgresql
     runtimeOnly("org.flywaydb:flyway-database-postgresql:11.13.3")
 
     // Lombok
@@ -61,8 +60,8 @@ dependencies {
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly("com.h2database:h2")
 
-    runtimeOnly("com.h2database:h2")
 
 }
 
