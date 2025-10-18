@@ -5,7 +5,7 @@ public record ProductionCostResponse(
     Long id,
     String name,
     Long energyCost,
-    Long laborHours,
+    Long laborHoursCost,
     Long equipmentCost,
     Long materialCost,
     Long logisticsCost,

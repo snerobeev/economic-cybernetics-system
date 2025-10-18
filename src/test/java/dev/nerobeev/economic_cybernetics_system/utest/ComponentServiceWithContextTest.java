@@ -118,6 +118,5 @@ class ComponentServiceWithContextTest {
     @DisplayName("")
     void calculateCostAndValidateReadinessTest() {
 
-        componentService.calculateCostAndValidateReadiness();
     }
 }

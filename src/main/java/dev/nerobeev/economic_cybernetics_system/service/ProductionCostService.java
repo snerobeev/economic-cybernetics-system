@@ -54,7 +54,11 @@ public class ProductionCostService {
 
   public ProductionCostResponse getTotalCost(ProductionCostCreateRequest request) {
     Long energyCost = request.energyCost();
-    var cost = productionCostRepository.findByEnergyCost(energyCost);
+    Long laborHoursCost = request.laborHoursCost();
+    Long equipmentCost = request.equipmentCost();
+    Long materialCost = request.materialCost();
+    Long logisticsCost = request.logisticsCost();
+    var savedEnergyCost = productionCostRepository.findByEnergyCost(energyCost);
 
     return null; //todo
   }
