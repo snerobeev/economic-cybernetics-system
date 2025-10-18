@@ -102,15 +102,15 @@ class ComponentServiceWithContextTest {
         new HashSet<>(),
         new HashSet<>()
     );
-    ComponentResponse response1 = componentService.createComponent(createRequest);
+    ComponentResponse response = componentService.createComponent(createRequest);
     ComponentResponse response2 = componentService.createComponent(createRequest2);
 
-    assertThat(response1.uCode()).isNotNull();
+    assertThat(response.uCode()).isNotNull();
     assertThat(response2.uCode()).isNotNull();
-    assertThat(response1.uCode()).isNotEqualTo(response2.uCode());
+    assertThat(response.uCode()).isNotEqualTo(response2.uCode());
 
     // формат uCode
-    assertThat(response1.uCode()).matches("CMP-\\d{8}-\\d{3}");
+    assertThat(response.uCode()).matches("CMP-\\d{8}-\\d{3}");
     assertThat(response2.uCode()).matches("CMP-\\d{8}-\\d{3}");
   }
 }
