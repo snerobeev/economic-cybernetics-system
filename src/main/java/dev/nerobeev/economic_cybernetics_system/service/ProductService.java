@@ -7,9 +7,9 @@ import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;
 import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.ProductMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.ProductRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,18 +26,17 @@ public class ProductService {
         var product = productMapper.toEntity(request, markingGenerator);
         product.setUCode(markingGenerator.generate(MarkingType.PRODUCT));
         var savedProduct = productRepository.save(product);
-
         return productMapper.toResponse(savedProduct);
-
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ProductResponse> getAllProducts() {
         return productRepository.findAll().stream()
                 .map(productMapper::toResponse)
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public ProductResponse getProductById(Long id) {
         var product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException(id));

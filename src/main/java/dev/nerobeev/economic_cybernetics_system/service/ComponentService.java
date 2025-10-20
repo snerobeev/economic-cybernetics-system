@@ -5,13 +5,13 @@ import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.component.ComponentCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.component.ComponentResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.Material;
-import dev.nerobeev.economic_cybernetics_system.entity.ProductionCost;
 import dev.nerobeev.economic_cybernetics_system.exeption.ComponentNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.ComponentMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.ComponentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -32,6 +32,7 @@ public class ComponentService {
         return componentMapper.toResponse(savedComponent);
     }
 
+    @Transactional(readOnly = true)
     public List<ComponentResponse> getAllComponents() {
         return componentRepository.findAll().stream()
                 .map(componentMapper::toResponse)

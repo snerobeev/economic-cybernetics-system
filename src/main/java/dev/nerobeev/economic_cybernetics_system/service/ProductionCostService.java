@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,44 +23,46 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductionCostService {
 
-  private final ProductionCostMapper productionCostMapper;
-  private final ProductionCostRepository productionCostRepository;
+    private final ProductionCostMapper productionCostMapper;
+    private final ProductionCostRepository productionCostRepository;
 
-  public ProductionCostResponse createProductionCost(ProductionCostCreateRequest request) {
-    var productionCost = productionCostMapper.toEntity(request);
-    var savedProductionCost = productionCostRepository.save(productionCost);
-    log.info("ProductionCost with ID: {}", savedProductionCost.getId() + " created");
-    return productionCostMapper.toResponse(savedProductionCost);
-  }
+    public ProductionCostResponse createProductionCost(ProductionCostCreateRequest request) {
+        var productionCost = productionCostMapper.toEntity(request);
+        var savedProductionCost = productionCostRepository.save(productionCost);
+        log.info("ProductionCost with ID: {}", savedProductionCost.getId() + " created");
+        return productionCostMapper.toResponse(savedProductionCost);
+    }
+    @Transactional(readOnly = true)
+    public void deleteProductionCost(Long id) {
+        var productionCost = productionCostRepository.findById(id)
+                .orElseThrow(() -> new ProductionCostNotFoundException(id));
+        productionCostRepository.delete(productionCost);
+        log.info("ProductionCost with id: {}", productionCost.getId() + " deleted");
+    }
 
-  public void deleteProductionCost(Long id) {
-    var productionCost = productionCostRepository.findById(id)
-                                                 .orElseThrow(() -> new ProductionCostNotFoundException(id));
-    productionCostRepository.delete(productionCost);
-    log.info("ProductionCost with id: {}", productionCost.getId() + " deleted");
-  }
+    @Transactional(readOnly = true)
+    public List<ProductionCostResponse> getAllProductionCosts() {
+        log.info("All ProductionCost found");
+        return productionCostRepository.findAll().stream()
+                .map(productionCostMapper::toResponse)
+                .toList();
+    }
 
-  public List<ProductionCostResponse> getAllProductionCosts() {
-    log.info("All ProductionCost found");
-    return productionCostRepository.findAll().stream()
-                                   .map(productionCostMapper::toResponse)
-                                   .toList();
-  }
+    @Transactional(readOnly = true)
+    public ProductionCostResponse getById(Long id) {
+        var productionCost = productionCostRepository.findById(id)
+                .orElseThrow(() -> new ProductionCostNotFoundException(id));
+        return productionCostMapper.toResponse(productionCost);
+    }
 
-  public ProductionCostResponse getById(Long id) {
-    var productionCost = productionCostRepository.findById(id)
-                                                 .orElseThrow(() -> new ProductionCostNotFoundException(id));
-    return productionCostMapper.toResponse(productionCost);
-  }
+    public ProductionCostResponse getTotalCost(ProductionCostCreateRequest request) {
+        Long energyCost = request.energyCost();
+        Long laborHoursCost = request.laborHoursCost();
+        Long equipmentCost = request.equipmentCost();
+        Long materialCost = request.materialCost();
+        Long logisticsCost = request.logisticsCost();
+        var savedEnergyCost = productionCostRepository.findByEnergyCost(energyCost);
 
-  public ProductionCostResponse getTotalCost(ProductionCostCreateRequest request) {
-    Long energyCost = request.energyCost();
-    Long laborHoursCost = request.laborHoursCost();
-    Long equipmentCost = request.equipmentCost();
-    Long materialCost = request.materialCost();
-    Long logisticsCost = request.logisticsCost();
-    var savedEnergyCost = productionCostRepository.findByEnergyCost(energyCost);
-
-    return null; //todo
-  }
+        return null; //todo
+    }
 }

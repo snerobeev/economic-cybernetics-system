@@ -132,7 +132,7 @@ class ComponentServiceWithContextTest {
     assertThat(savedComponent.getMaterials()).doesNotContainNull();
     assertThat(savedComponent.getMaterials()).hasSize(1);
 
-    assertThat(savedComponent.getProducts??()//todo
+//    assertThat(savedComponent.getProducts??()
 
   }
 
