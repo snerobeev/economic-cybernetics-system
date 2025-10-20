@@ -4,7 +4,6 @@ import dev.nerobeev.economic_cybernetics_system.domain.IndustryCode;
 import dev.nerobeev.economic_cybernetics_system.domain.Status;
 import dev.nerobeev.economic_cybernetics_system.domain.UnitOfMeasure;
 import dev.nerobeev.economic_cybernetics_system.entity.Material;
-import dev.nerobeev.economic_cybernetics_system.entity.Product;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 
@@ -36,7 +35,6 @@ public record ComponentCreateRequest(
         LocalDate productionDate,
         @NotNull
         Boolean strategic,
-        Set<Product> products,
         Set<Material> materials
 ) {
 }

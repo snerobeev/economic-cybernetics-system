@@ -73,7 +73,7 @@ public class Component {
   @Column
   private Boolean strategic; // Является ли продукт стратегическим
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
   @JoinTable(
       name = "component_materials",
       joinColumns = @JoinColumn(name = "component_id"),
