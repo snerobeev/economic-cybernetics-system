@@ -24,7 +24,6 @@ public class ComponentService {
     private final ComponentMapper componentMapper;
     private final ComponentRepository componentRepository;
     private final MarkingGenerator markingGenerator;
-    private final ProductionCost productionCost;
 
     public ComponentResponse createComponent(ComponentCreateRequest createRequest) {
         var component = componentMapper.toEntity(createRequest, markingGenerator);

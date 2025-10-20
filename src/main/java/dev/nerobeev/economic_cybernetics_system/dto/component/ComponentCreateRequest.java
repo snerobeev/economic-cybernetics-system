@@ -6,6 +6,7 @@ import dev.nerobeev.economic_cybernetics_system.domain.UnitOfMeasure;
 import dev.nerobeev.economic_cybernetics_system.entity.Material;
 import dev.nerobeev.economic_cybernetics_system.entity.Product;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -31,6 +32,7 @@ public record ComponentCreateRequest(
         @NotNull
         String planPeriod,
         @NotNull
+        @PastOrPresent
         LocalDate productionDate,
         @NotNull
         Boolean strategic,

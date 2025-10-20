@@ -82,9 +82,9 @@ public class Material {
     private Product product;
 
     // Конструктор для тестов
-    public Material(String name, String supplier, Long costPerUnit) {
+    public Material(String name, String producer, Long costPerUnit) {
         this.name = name;
-        this.producer = supplier;
+        this.producer = producer;
         this.costPerUnit = costPerUnit;
     }
 
