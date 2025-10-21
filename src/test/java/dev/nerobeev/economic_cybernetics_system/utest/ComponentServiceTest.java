@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @DisplayName("ComponentService Integration Test")
-class ComponentServiceWithContextTest {
+class ComponentServiceTest {
   @LocalServerPort
   private int port;
   @Autowired
