@@ -2,6 +2,7 @@ package dev.nerobeev.economic_cybernetics_system.service;
 
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostResponse;
+import dev.nerobeev.economic_cybernetics_system.entity.Material;
 import dev.nerobeev.economic_cybernetics_system.exeption.ProductionCostNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.ProductionCostMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.ProductionCostRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -79,4 +81,15 @@ public class ProductionCostService {
 
     return result.sum();
   }
+
+  public Long getTotalCostPerUnitFromMaterials(Set<Material> materials) {
+      if(materials.isEmpty()) {
+          log.error("Materials is empty");
+          throw new RuntimeException(materials + " is empty."); //todo
+      }
+      return materials.stream()
+              .mapToLong(Material::getCostPerUnit)
+              .sum();
+  }
+
 }

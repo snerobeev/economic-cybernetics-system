@@ -18,38 +18,38 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MaterialService {
-  private final MaterialRepository materialRepository;
-  private final MaterialMapper materialMapper;
-  private final MarkingGenerator markingGenerator;
+    private final MaterialRepository materialRepository;
+    private final MaterialMapper materialMapper;
+    private final MarkingGenerator markingGenerator;
 
-  public MaterialResponse createMaterial(MaterialCreateRequest request) {
+    public MaterialResponse createMaterial(MaterialCreateRequest request) {
 
-    var material = materialMapper.toEntity(request, markingGenerator);
-    material.setUCode(markingGenerator.generate(MarkingType.MATERIAL));
-    var savedMaterial = materialRepository.save(material);
-    log.info("Material with ID: {}", material.getId() + " created");
-    return materialMapper.toResponse(savedMaterial);
-  }
+        var material = materialMapper.toEntity(request, markingGenerator);
+        material.setUCode(markingGenerator.generate(MarkingType.MATERIAL));
+        var savedMaterial = materialRepository.save(material);
+        log.info("Material with ID: {}", material.getId() + " created");
+        return materialMapper.toResponse(savedMaterial);
+    }
 
-  @Transactional(readOnly = true)
-  public List<MaterialResponse> getAllMaterials() {
-    return materialRepository.findAll().stream()
-                             .map(materialMapper::toResponse)
-                             .toList();
-  }
+    @Transactional(readOnly = true)
+    public List<MaterialResponse> getAllMaterials() {
+        return materialRepository.findAll().stream()
+                .map(materialMapper::toResponse)
+                .toList();
+    }
 
-  @Transactional(readOnly = true)
-  public MaterialResponse getMaterialById(Long id) {
-    var material = materialRepository.findMaterialById(id)
-                                     .orElseThrow(() -> new MaterialNotFoundException(id));
-    return materialMapper.toResponse(material);
-  }
+    @Transactional(readOnly = true)
+    public MaterialResponse getMaterialById(Long id) {
+        var material = materialRepository.findMaterialById(id)
+                .orElseThrow(() -> new MaterialNotFoundException(id));
+        return materialMapper.toResponse(material);
+    }
 
-  public void deleteMaterial(Long id) {
-    var material = materialRepository.findMaterialById(id)
-        .orElseThrow(()-> new MaterialNotFoundException(id));
-    materialRepository.delete(material);
-    log.info("Material with id: {}", material.getId() + " deleted");
-  }
+    public void deleteMaterial(Long id) {
+        var material = materialRepository.findMaterialById(id)
+                .orElseThrow(() -> new MaterialNotFoundException(id));
+        materialRepository.delete(material);
+        log.info("Material with id: {}", material.getId() + " deleted");
+    }
 
 }
