@@ -56,7 +56,7 @@ public class ProductionCostService {
     return productionCostMapper.toResponse(productionCost);
   }
 
-  public Long getTotalCost() {
+  public Long computeTotalCost() {
     var result = productionCostRepository.findAll().stream()
                                          .mapToLong(v ->
                                                             v.getEnergyCost() +

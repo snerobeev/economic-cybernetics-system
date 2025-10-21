@@ -8,7 +8,7 @@ public record ProductionCostCreateRequest(
     @NotNull
     Long energyCost,
     @NotNull
-    Long laborHoursCost,
+    Long laborHours,
     @NotNull
     Long equipmentCost,
     @NotNull
