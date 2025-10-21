@@ -77,9 +77,9 @@ public class Material {
     @NotNull
     private Boolean strategic; // Является ли продукт стратегическим
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+//    @ManyToOne
+//    @JoinColumn(name = "product_id")
+//    private Product product; //todo
 
     // Конструктор для тестов
     public Material(String name, String producer, Long costPerUnit) {
