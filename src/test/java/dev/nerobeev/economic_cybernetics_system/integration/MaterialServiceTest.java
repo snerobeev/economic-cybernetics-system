@@ -4,66 +4,101 @@ import dev.nerobeev.economic_cybernetics_system.domain.IndustryCode;
 import dev.nerobeev.economic_cybernetics_system.domain.Status;
 import dev.nerobeev.economic_cybernetics_system.domain.UnitOfMeasure;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
+import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.entity.Material;
+import dev.nerobeev.economic_cybernetics_system.exeption.MaterialNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.repository.MaterialRepository;
 import dev.nerobeev.economic_cybernetics_system.service.MaterialService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import dev.nerobeev.economic_cybernetics_system.service.ProductionCostService;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 @SpringBootTest(
-    webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
-    properties = {"server.port=8081"})
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
+        properties = {"server.port=8081"})
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @DisplayName("ProductionCostService Integration Test")
 class MaterialServiceTest {
 
-  private Material material;
-  @Autowired
-  private MaterialRepository materialRepository;
-  @Autowired
-  private MaterialService materialService;
-  private MaterialCreateRequest materialCreateRequest;
+    private Material material;
+    @Autowired
+    private MaterialRepository materialRepository;
+    @Autowired
+    private MaterialService materialService;
+    private MaterialCreateRequest materialCreateRequest;
+    private ProductionCostCreateRequest productionCostCreateRequest;
+    @Autowired
+    private ProductionCostService productionCostService;
 
-  @BeforeEach
-  void setUp() {
-    materialRepository.deleteAll();
+    @BeforeEach
+    void setUp() {
+        materialRepository.deleteAll();
 
-    materialCreateRequest = new MaterialCreateRequest(
-        "Steel Alloy X1",              // name
-        UnitOfMeasure.TON,                  // unit
-        150L,                               // costPerUnit
-        180L,                               // pricePerUnit
-        "Severstal",                        // producer
-        500L,                               // quantity
-        Status.RAW,                         // status
-        IndustryCode.ENERGY,                // industryCode
-        "Q4-2025",                          // planPeriod
-        LocalDate.now(),                    // productionDate
-        true                                // strategic
-    );
+        materialCreateRequest = new MaterialCreateRequest(
+                "Steel Alloy X1",             // name
+                UnitOfMeasure.TON,                  // unit
+                0L,                                 // costPerUnit
+                180L,                               // pricePerUnit
+                "Severstal",                        // producer
+                500L,                               // quantity
+                Status.RAW,                         // status
+                IndustryCode.ENERGY,                // industryCode
+                "Q4-2025",                          // planPeriod
+                LocalDate.now(),                    // productionDate
+                true                                // strategic
+        );
 
-    var saved = materialRepository.save(materialCreateRequest); // todo @Entity Material MaterialResoponse?
-  }
+        productionCostCreateRequest = new ProductionCostCreateRequest(
+                "Steel Alloy X1", // name
+                10L,  // energyCost
+                10L,  // laborHours
+                10L,  // equipmentCost
+                10L,  // materialCost
+                10L,  // logisticsCost
+                10L,  // licenseCost
+                10L,  // taxCost
+                10L,  // socialCost
+                10L,  // amortizationCost
+                10L,  // equipmentMaintenanceCost
+                10L,  // administrativeCost
+                10L,  // rentalCost
+                10L,  // communicationCost
+                10L,  // insuranceCost
+                10L,  // researchAndDevelopmentCost
+                10L,  // interestCost
+                10L   // ecoCost
+        );
+    }
 
-  @AfterEach
-  void tearDown() {
-    materialRepository.deleteAll();
-  }
+    @AfterEach
+    void tearDown() {
+        materialRepository.deleteAll();
+    }
 
-  @Test()
-  void calculateCostOfMaterial() {
-    String materialName = "Steel Alloy X1";
-    String productionCostName = "Steel Alloy X1";
+    @Test()
+    @DisplayName("Positive. Calculate and update material costPerUnit.")
+    void calculatesMaterialCostSuccessfully_Test() {
 
-    materialService.calculateCostOfMaterial(materialName,productionCostName);
-  }
+        var materialResponse = materialService.createMaterial(materialCreateRequest);
+        var prodCostResponse = productionCostService.createProductionCost(productionCostCreateRequest);
+        var materialName = materialResponse.name();
+        var prodCostName = prodCostResponse.name();
+
+        var result = materialService.calculateCostOfMaterial(materialName, prodCostName);
+        var costPerUnit = materialRepository.findMaterialByName(materialName ).stream()
+                .findFirst()
+                .map(Material::getCostPerUnit)
+                .orElseThrow(() -> new MaterialNotFoundException(materialResponse.id()));
+
+        System.out.println("----------------------------- " + result);
+        Assertions.assertEquals(materialName, prodCostName);
+        Assertions.assertEquals(costPerUnit, result);
+    }
 }

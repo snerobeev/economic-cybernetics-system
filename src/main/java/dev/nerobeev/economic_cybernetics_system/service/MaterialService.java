@@ -67,13 +67,16 @@ public class MaterialService {
       throw new RuntimeException("MaterialName and productionCostName are not equal."); //todo
     }
 
-    var savedMaterial = materialRepository.findMaterialByName(materialName)
-    .orElseThrow(() -> new RuntimeException(materialName + " not found in materialRepository."));
+    var material = materialRepository.findMaterialByName(materialName)
+    .orElseThrow(() -> new RuntimeException(materialName + " not found in materialRepository.")); //todo
 
     var computedTotalCost = productionCostService.computeTotalCost(prodCostName);
+    var sumMaterialWithComputedTotalCost = material.getCostPerUnit() + computedTotalCost;
 
-    savedMaterial.setCostPerUnit(computedTotalCost);
-    return savedMaterial.getCostPerUnit();
+    material.setCostPerUnit(sumMaterialWithComputedTotalCost);
+    var materialWithCostPerUnit = materialRepository.save(material);
+
+    return materialWithCostPerUnit.getCostPerUnit();
   }
 
 }
