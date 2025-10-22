@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.utest;
+package dev.nerobeev.economic_cybernetics_system.integration;
 
 import dev.nerobeev.economic_cybernetics_system.domain.IndustryCode;
 import dev.nerobeev.economic_cybernetics_system.domain.Status;

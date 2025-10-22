@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.utest;
+package dev.nerobeev.economic_cybernetics_system.integration;
 
 
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostCreateRequest;
@@ -12,8 +12,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.time.LocalDate;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -37,7 +35,7 @@ class ProductionCostServiceTest {
     void setUp() {
         productionCostRepository.deleteAll();
         productionCostCreateRequest = new ProductionCostCreateRequest(
-                "Производство Компонента X1", // name
+                "SSD 25", // name
                 200L,  // energyCost
                 100L,  // laborHours
                 50L,   // equipmentCost
@@ -94,7 +92,7 @@ class ProductionCostServiceTest {
 
         assertThat(savedProductionCost).isNotNull();
         assertThat(savedProductionCost.getId()).isNotNull();
-        assertThat(savedProductionCost.getName()).isEqualTo("Производство Компонента X1");
+        assertThat(savedProductionCost.getName()).isEqualTo("SSD 25");
         assertThat(savedProductionCost.getEnergyCost()).isEqualTo(200L);
         assertThat(savedProductionCost.getLaborHours()).isEqualTo(100L);
         assertThat(savedProductionCost.getEquipmentCost()).isEqualTo(50L);
@@ -117,13 +115,14 @@ class ProductionCostServiceTest {
     @Test
     @DisplayName("Successful summation of production costs")
     void getComputeProductionCostTest() {
-
-        productionCostService
-                .createProductionCost(productionCostCreateRequest);
-        var resultTotalCost = productionCostService.computeTotalCost();
+        var expectedName = "SSD 25";
+        var prodCost = productionCostService.createProductionCost(productionCostCreateRequest);
+        var resultTotalCost = productionCostService.computeTotalCost(expectedName);
 
         assertThat(resultTotalCost).isNotNull();
         assertThat(resultTotalCost).isEqualTo(2150L);
+        Assertions.assertEquals(expectedName, prodCost.name());
+
     }
 
 }

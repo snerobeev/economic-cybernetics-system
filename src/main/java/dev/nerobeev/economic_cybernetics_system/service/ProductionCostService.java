@@ -58,8 +58,8 @@ public class ProductionCostService {
     return productionCostMapper.toResponse(productionCost);
   }
 
-  public Long computeTotalCost() {
-    var result = productionCostRepository.findAll().stream()
+  public Long computeTotalCost(String prodCostName) {
+    var result = productionCostRepository.findCostByName(prodCostName).stream()
                                          .mapToLong(v ->
                                                             v.getEnergyCost() +
                                                             v.getLaborHours() +
@@ -82,7 +82,7 @@ public class ProductionCostService {
     return result.sum();
   }
 
-  public Long getTotalCostPerUnitFromMaterials(Set<Material> materials) {
+  public Long getTotalCostPerUnitFromAllMaterials(Set<Material> materials) {
       if(materials.isEmpty()) {
           log.error("Materials is empty");
           throw new RuntimeException(materials + " is empty."); //todo

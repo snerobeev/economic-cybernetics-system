@@ -12,7 +12,12 @@ public record MaterialCreateRequest(
     String name,
     @NotNull
     UnitOfMeasure unit,
-    @NotNull
+    /*
+     * Себестоимость единицы.
+     * ЭТО ПОЛЕ ОПЦИОНАЛЬНО и НЕ ДОЛЖНО заполняться клиентом,
+     * так как рассчитывается автоматически сервисом ProductionCostService.
+     * Передача null или отсутствие поля приветствуется.
+     */
     Long costPerUnit,
     @NotNull
     Long pricePerUnit,
