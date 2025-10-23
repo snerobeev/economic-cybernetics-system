@@ -17,7 +17,7 @@ import org.mapstruct.ReportingPolicy;
 public interface ProductionCostMapper {
   
   ProductionCost toEntity(ProductionCostCreateRequest request);
-  ProductionCostResponse toResponse(ProductionCost productionCost);
+  ProductionCostResponse toResponse(ProductionCost entity);
 
 
 }

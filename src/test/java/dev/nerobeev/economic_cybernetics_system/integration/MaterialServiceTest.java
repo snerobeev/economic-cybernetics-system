@@ -17,7 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
@@ -92,7 +91,7 @@ class MaterialServiceTest {
         var prodCostName = prodCostResponse.name();
 
         var result = materialService.calculateCostOfMaterial(materialName, prodCostName);
-        var costPerUnit = materialRepository.findMaterialByName(materialName ).stream()
+        var costPerUnit = materialRepository.findMaterialByName(materialName).stream()
                 .findFirst()
                 .map(Material::getCostPerUnit)
                 .orElseThrow(() -> new MaterialNotFoundException(materialResponse.id()));

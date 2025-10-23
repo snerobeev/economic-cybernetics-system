@@ -1,6 +1,10 @@
 package dev.nerobeev.economic_cybernetics_system.integration;
 
 
+import dev.nerobeev.economic_cybernetics_system.domain.IndustryCode;
+import dev.nerobeev.economic_cybernetics_system.domain.Status;
+import dev.nerobeev.economic_cybernetics_system.domain.UnitOfMeasure;
+import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.ProductionCost;
@@ -12,6 +16,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
+
+import java.time.LocalDate;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -30,10 +36,13 @@ class ProductionCostServiceTest {
     private ProductionCostService productionCostService;
     private ProductionCostCreateRequest productionCostCreateRequest;
     private ProductionCostResponse productionCostResponse;
+    private MaterialCreateRequest steel;
+    private MaterialCreateRequest rock;
 
     @BeforeEach
     void setUp() {
         productionCostRepository.deleteAll();
+
         productionCostCreateRequest = new ProductionCostCreateRequest(
                 "SSD 25", // name
                 200L,  // energyCost
@@ -54,6 +63,34 @@ class ProductionCostServiceTest {
                 55L,   // interestCost
                 20L    // ecoCost
         );
+
+       steel = new MaterialCreateRequest(
+          "Steel Alloy X1",             // name
+          UnitOfMeasure.TON,                  // unit
+          0L,                                 // costPerUnit
+          180L,                               // pricePerUnit
+          "Severstal",                        // producer
+          500L,                               // quantity
+          Status.RAW,                         // status
+          IndustryCode.ENERGY,                // industryCode
+          "Q4-2025",                          // planPeriod
+          LocalDate.now(),                    // productionDate
+          true                                // strategic
+      );
+
+      rock = new MaterialCreateRequest(
+          "Steel Alloy X1",             // name
+          UnitOfMeasure.TON,                  // unit
+          0L,                                 // costPerUnit
+          180L,                               // pricePerUnit
+          "Severstal",                        // producer
+          500L,                               // quantity
+          Status.RAW,                         // status
+          IndustryCode.ENERGY,                // industryCode
+          "Q4-2025",                          // planPeriod
+          LocalDate.now(),                    // productionDate
+          true                                // strategic
+      );
     }
 
     @AfterEach
@@ -65,7 +102,7 @@ class ProductionCostServiceTest {
     @DisplayName("Successful create productionCost and save it in DB")
     void getCreateProductionCostAndSaveInDBTest() {
 
-        var productionCostResponse = productionCostService
+        productionCostResponse = productionCostService
                 .createProductionCost(productionCostCreateRequest);
 
         assertThat(productionCostResponse).isNotNull();
@@ -122,6 +159,12 @@ class ProductionCostServiceTest {
         assertThat(resultTotalCost).isNotNull();
         assertThat(resultTotalCost).isEqualTo(2150L);
         Assertions.assertEquals(expectedName, prodCost.name());
+
+    }
+
+    @Test
+  @DisplayName(" ")
+  void getTotalCostPerUnitFromAllMaterialsTest() {
 
     }
 

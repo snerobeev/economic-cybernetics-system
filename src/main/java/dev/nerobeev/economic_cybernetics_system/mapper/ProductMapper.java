@@ -14,11 +14,9 @@ import org.mapstruct.*;
 
 public interface ProductMapper {
 
-  // Request DTO -> Entity (Запрос на создание нового продукта)
   @Mapping(target = "id", ignore = true)
   Product toEntity(ProductCreateRequest request,@Context MarkingGenerator generator);
 
-  // Entity -> Response DTO (Ответ клиенту)
-  ProductResponse toResponse(Product product);
+  ProductResponse toResponse(Product entity);
 
 }

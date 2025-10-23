@@ -34,7 +34,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     log.error("Create Product operation error: {}", exception.getMessage(), exception);
     var formattedTime = formatTimeStamp(Instant.now());
     return new ErrorMessageResponse(exception.getMessage(), formattedTime);
-
   }
 
   @ExceptionHandler(DataIntegrityViolationException.class)
@@ -45,7 +44,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     return ResponseEntity
         .status(HttpStatus.BAD_REQUEST)
         .body(new ErrorMessageResponse(exception.getLocalizedMessage(), formattedTime));
-
   }
 
   @ExceptionHandler({ProductionCostNotFoundException.class})

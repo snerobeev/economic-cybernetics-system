@@ -18,6 +18,6 @@ public interface ComponentMapper {
 
     @Mapping(source = "materials", target = "materials")
     @Mapping(source = "UCode", target = "uCode")
-    ComponentResponse toResponse(Component component);
+    ComponentResponse toResponse(Component entity);
 
 }

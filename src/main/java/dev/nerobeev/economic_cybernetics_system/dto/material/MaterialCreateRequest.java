@@ -19,7 +19,12 @@ public record MaterialCreateRequest(
      * Передача null или отсутствие поля приветствуется.
      */
     Long costPerUnit,
-    @NotNull
+    /*
+     * Рыночная стоимость единицы.
+     * ЭТО ПОЛЕ ОПЦИОНАЛЬНО и НЕ ДОЛЖНО заполняться клиентом,
+     * так как рассчитывается автоматически сервисом ProductionCostService.
+     * Передача null или отсутствие поля приветствуется.
+     */
     Long pricePerUnit,
     @NotNull
     String producer,

@@ -4,6 +4,7 @@ import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingGenerat
 import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialResponse;
+import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialUpdateRequest;
 import dev.nerobeev.economic_cybernetics_system.entity.ProductionCost;
 import dev.nerobeev.economic_cybernetics_system.exeption.MaterialNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.exeption.ProductionCostNotFoundException;
@@ -50,6 +51,14 @@ public class MaterialService {
     return materialMapper.toResponse(material);
   }
 
+  public MaterialResponse updateMaterial(Long id, MaterialUpdateRequest updateRequest) {
+    var material = materialRepository.findMaterialById(id)
+                                     .orElseThrow(() -> new MaterialNotFoundException(id));
+    materialMapper.updateEntity(material, updateRequest);
+    var updateMaterial = materialRepository.save(material);
+    return materialMapper.toResponse(updateMaterial);
+  }
+
   public void deleteMaterial(Long id) {
     var material = materialRepository.findMaterialById(id)
                                      .orElseThrow(() -> new MaterialNotFoundException(id));
@@ -68,12 +77,13 @@ public class MaterialService {
     }
 
     var material = materialRepository.findMaterialByName(materialName)
-    .orElseThrow(() -> new RuntimeException(materialName + " not found in materialRepository.")); //todo
+                                     .orElseThrow(() -> new RuntimeException(
+                                         materialName + " not found in materialRepository.")); //todo
 
     var computedTotalCost = productionCostService.computeTotalCost(prodCostName);
     var sumMaterialWithComputedTotalCost = material.getCostPerUnit() + computedTotalCost;
 
-    material.setCostPerUnit(sumMaterialWithComputedTotalCost);
+    material.setCostPerUnit(sumMaterialWithComputedTotalCost); // todo DANYA
     var materialWithCostPerUnit = materialRepository.save(material);
 
     return materialWithCostPerUnit.getCostPerUnit();
