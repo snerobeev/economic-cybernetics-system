@@ -33,7 +33,7 @@ public class Material {
     private String name; // Название материала (например, "Сталь")
 
     @Column(name = "ucode")
-    private String uCode; // Уникальная маркировка: MAT-20251003-001
+    private String code; // Уникальная маркировка: MAT-20251003-001
 
     @Column(name = "unit")
     @Enumerated(EnumType.STRING)
@@ -82,11 +82,11 @@ public class Material {
 //    private Product product; //todo
 
     // Конструктор для тестов
-    public Material(String name, String producer, Long costPerUnit) {
-        this.name = name;
-        this.producer = producer;
-        this.costPerUnit = costPerUnit;
-    }
+//    public Material(String name, String producer, Long costPerUnit) {
+//        this.name = name;
+//        this.producer = producer;
+//        this.costPerUnit = costPerUnit;
+//    }
 
     /*
      *  Можно связать Material с Product через @ManyToOne или @ManyToMany, в зависимости от модели.

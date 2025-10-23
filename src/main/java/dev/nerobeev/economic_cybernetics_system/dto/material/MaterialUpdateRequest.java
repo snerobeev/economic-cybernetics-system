@@ -8,6 +8,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 @Setter
 public class MaterialUpdateRequest {
   private JsonNullable<String> name;
+  private JsonNullable<String> code;
   private JsonNullable<Long> costPerUnit;
   private JsonNullable<Long> pricePerUnit;
 }

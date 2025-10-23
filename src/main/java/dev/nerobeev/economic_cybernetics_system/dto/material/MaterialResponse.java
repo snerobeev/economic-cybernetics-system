@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public record MaterialResponse(
     Long id,
     String name,
-    String uCode,
+    String code,
     UnitOfMeasure unit,
     Long costPerUnit,
     Long pricePerUnit,

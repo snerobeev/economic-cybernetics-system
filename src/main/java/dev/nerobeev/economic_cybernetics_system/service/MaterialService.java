@@ -5,9 +5,7 @@ import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialResponse;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialUpdateRequest;
-import dev.nerobeev.economic_cybernetics_system.entity.ProductionCost;
 import dev.nerobeev.economic_cybernetics_system.exeption.MaterialNotFoundException;
-import dev.nerobeev.economic_cybernetics_system.exeption.ProductionCostNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.MaterialMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.MaterialRepository;
 import dev.nerobeev.economic_cybernetics_system.repository.ProductionCostRepository;
@@ -31,7 +29,7 @@ public class MaterialService {
   public MaterialResponse createMaterial(MaterialCreateRequest request) {
 
     var material = materialMapper.toEntity(request, markingGenerator);
-    material.setUCode(markingGenerator.generate(MarkingType.MATERIAL));
+    material.setCode(markingGenerator.generate(MarkingType.MATERIAL));
     var savedMaterial = materialRepository.save(material);
     log.info("Material with ID: {}", material.getId() + " created");
     return materialMapper.toResponse(savedMaterial);

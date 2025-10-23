@@ -25,6 +25,7 @@ public class ComponentService {
     private final ComponentRepository componentRepository;
     private final MarkingGenerator markingGenerator;
 
+    @Transactional
     public ComponentResponse createComponent(ComponentCreateRequest createRequest) {
         var component = componentMapper.toEntity(createRequest, markingGenerator);
         component.setUCode(markingGenerator.generate(MarkingType.COMPONENT));

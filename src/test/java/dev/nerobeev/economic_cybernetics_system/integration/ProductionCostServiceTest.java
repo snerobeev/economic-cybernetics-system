@@ -4,9 +4,9 @@ package dev.nerobeev.economic_cybernetics_system.integration;
 import dev.nerobeev.economic_cybernetics_system.domain.IndustryCode;
 import dev.nerobeev.economic_cybernetics_system.domain.Status;
 import dev.nerobeev.economic_cybernetics_system.domain.UnitOfMeasure;
-import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostResponse;
+import dev.nerobeev.economic_cybernetics_system.entity.Material;
 import dev.nerobeev.economic_cybernetics_system.entity.ProductionCost;
 import dev.nerobeev.economic_cybernetics_system.repository.ProductionCostRepository;
 import dev.nerobeev.economic_cybernetics_system.service.ProductionCostService;
@@ -18,8 +18,11 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
@@ -36,8 +39,7 @@ class ProductionCostServiceTest {
     private ProductionCostService productionCostService;
     private ProductionCostCreateRequest productionCostCreateRequest;
     private ProductionCostResponse productionCostResponse;
-    private MaterialCreateRequest steel;
-    private MaterialCreateRequest rock;
+    private Set<Material> materials;
 
     @BeforeEach
     void setUp() {
@@ -63,34 +65,40 @@ class ProductionCostServiceTest {
                 55L,   // interestCost
                 20L    // ecoCost
         );
+        materials = new HashSet<>();
+        Material steel = Material.builder()
+                .name("Steel Alloy X1")
+                .code("MAT-20251003-001")
+                .unit(UnitOfMeasure.TON)
+                .costPerUnit(100L)
+                .pricePerUnit(180L)
+                .producer("Severstal")
+                .quantity(180L)
+                .status(Status.RAW)
+                .industryCode(IndustryCode.ENERGY)
+                .planPeriod("Q4-2025")
+                .productionDate(LocalDate.now())
+                .strategic(true)
+                .build();
 
-       steel = new MaterialCreateRequest(
-          "Steel Alloy X1",             // name
-          UnitOfMeasure.TON,                  // unit
-          0L,                                 // costPerUnit
-          180L,                               // pricePerUnit
-          "Severstal",                        // producer
-          500L,                               // quantity
-          Status.RAW,                         // status
-          IndustryCode.ENERGY,                // industryCode
-          "Q4-2025",                          // planPeriod
-          LocalDate.now(),                    // productionDate
-          true                                // strategic
-      );
 
-      rock = new MaterialCreateRequest(
-          "Steel Alloy X1",             // name
-          UnitOfMeasure.TON,                  // unit
-          0L,                                 // costPerUnit
-          180L,                               // pricePerUnit
-          "Severstal",                        // producer
-          500L,                               // quantity
-          Status.RAW,                         // status
-          IndustryCode.ENERGY,                // industryCode
-          "Q4-2025",                          // planPeriod
-          LocalDate.now(),                    // productionDate
-          true                                // strategic
-      );
+        Material plastic = Material.builder()
+                .name("Plastic W")
+                .code("MAT-20251003-002")
+                .unit(UnitOfMeasure.TON)
+                .costPerUnit(30L)
+                .pricePerUnit(80L)
+                .producer("BASF")
+                .quantity(100L)
+                .status(Status.RAW)
+                .industryCode(IndustryCode.ENERGY)
+                .planPeriod("Q4-2025")
+                .productionDate(LocalDate.now())
+                .strategic(true)
+                .build();
+
+        materials.add(steel);
+        materials.add(plastic);
     }
 
     @AfterEach
@@ -150,7 +158,7 @@ class ProductionCostServiceTest {
     }
 
     @Test
-    @DisplayName("Successful summation of production costs")
+    @DisplayName("Successful summation of production costs.")
     void getComputeProductionCostTest() {
         var expectedName = "SSD 25";
         var prodCost = productionCostService.createProductionCost(productionCostCreateRequest);
@@ -158,14 +166,17 @@ class ProductionCostServiceTest {
 
         assertThat(resultTotalCost).isNotNull();
         assertThat(resultTotalCost).isEqualTo(2150L);
-        Assertions.assertEquals(expectedName, prodCost.name());
+        assertEquals(expectedName, prodCost.name());
 
     }
 
     @Test
-  @DisplayName(" ")
-  void getTotalCostPerUnitFromAllMaterialsTest() {
+    @DisplayName("Successful summation of cost per unit from all materials.")
+    void getTotalCostPerUnitFromAllMaterialsTest() {
+        Long expectedTotalCost = 130L;
+        Long actualTotalCost = productionCostService.getTotalCostPerUnitFromAllMaterials(materials);
 
+        assertEquals(expectedTotalCost,actualTotalCost);
     }
 
 }

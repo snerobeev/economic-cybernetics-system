@@ -17,10 +17,10 @@ public interface MaterialMapper {
 
   Material toEntity(MaterialCreateRequest request, @Context MarkingGenerator generator);
 
-  @Mapping(source = "UCode", target = "uCode")
+  @Mapping(source = "code", target = "code")
   MaterialResponse toResponse(Material entity);
 
-  @Mapping(source = "UCode", target = "uCode")
+  @Mapping(source = "code", target = "code")
   void updateEntity(@MappingTarget Material entity, MaterialUpdateRequest dto);
 
 }
