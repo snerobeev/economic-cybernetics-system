@@ -92,7 +92,7 @@ class MaterialServiceTest {
         var materialName = materialResponse.name();
         var prodCostName = prodCostResponse.name();
 
-        var result = materialService.calculateCostOfMaterial(materialName, prodCostName);
+        var result = materialService.calculateCostPerUnit(materialName, prodCostName);
         var costPerUnit = materialRepository.findMaterialByName(materialName).stream()
                 .findFirst()
                 .map(Material::getCostPerUnit)

@@ -57,7 +57,7 @@ public class ProductionCostService {
                                                  .orElseThrow(() -> new ProductionCostNotFoundException(id));
     return productionCostMapper.toResponse(productionCost);
   }
-
+  // Суммирует все Затраты Материала (у каждого вида Материала - свои Затраты)
   public Long computeTotalCost(String prodCostName) {
     var result = productionCostRepository.findCostByName(prodCostName).stream()
                                          .mapToLong(v ->
@@ -81,7 +81,7 @@ public class ProductionCostService {
 
     return result.sum();
   }
-
+  // Суммирует все стоимости Материалов общую стоимость из списка Материалов
   public Long getTotalCostPerUnitFromAllMaterials(Set<Material> materials) {
       if(materials.isEmpty()) {
           log.error("Materials is empty");
@@ -91,6 +91,8 @@ public class ProductionCostService {
               .mapToLong(Material::getCostPerUnit)
               .sum();
   }
+
+
 
 }
 

@@ -23,8 +23,6 @@ public class MaterialService {
   private final MaterialRepository materialRepository;
   private final MaterialMapper materialMapper;
   private final MarkingGenerator markingGenerator;
-  private final ProductionCostRepository productionCostRepository;
-  private final ProductionCostService productionCostService;
 
   public MaterialResponse createMaterial(MaterialCreateRequest request) {
 
@@ -65,23 +63,17 @@ public class MaterialService {
   }
 
   // расчет стоимости Материала
-  public Long calculateCostOfMaterial(String materialName, String prodCostName) { //todo DANYA
+  public Long calculateCostPerUnit(String materialName) {
 
-    if (materialName == null || prodCostName == null) {
-      throw new RuntimeException("MaterialName or productionCostName cannot contains null."); //todo
-    }
-    if (!materialName.equals(prodCostName)) {
-      throw new RuntimeException("MaterialName and productionCostName are not equal."); //todo
+    if (materialName == null) {
+      throw new RuntimeException("MaterialName is null."); //todo
     }
 
     var material = materialRepository.findMaterialByName(materialName)
-                                     .orElseThrow(() -> new RuntimeException(
-                                         materialName + " not found in materialRepository.")); //todo
-
-    var computedTotalCost = productionCostService.computeTotalCost(prodCostName);
-    var sumMaterialWithComputedTotalCost = material.getCostPerUnit() + computedTotalCost;
+                                     .orElseThrow();
 
     material.setCostPerUnit(sumMaterialWithComputedTotalCost); // todo DANYA
+
     var materialWithCostPerUnit = materialRepository.save(material);
 
     return materialWithCostPerUnit.getCostPerUnit();

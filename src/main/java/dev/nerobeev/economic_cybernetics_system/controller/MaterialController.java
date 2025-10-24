@@ -2,7 +2,9 @@ package dev.nerobeev.economic_cybernetics_system.controller;
 
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialResponse;
+import dev.nerobeev.economic_cybernetics_system.repository.ProductionCostRepository;
 import dev.nerobeev.economic_cybernetics_system.service.MaterialService;
+import dev.nerobeev.economic_cybernetics_system.service.ProductionCostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ import java.util.List;
 public class MaterialController {
 
   private final MaterialService materialService;
+  private final ProductionCostRepository productionCostRepository;
+  private final ProductionCostService productionCostService;
 
   @GetMapping
   public ResponseEntity<List<MaterialResponse>> getAllMaterials() {
@@ -32,6 +36,9 @@ public class MaterialController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public MaterialResponse createMaterial(@RequestBody @Valid MaterialCreateRequest request) {
+    var totalProdCostOfMaterial = productionCostService.computeTotalCost(request.name());
+    var costMaterial = materialService.calculateCostPerUnit(request.name());
+
     return materialService.createMaterial(request);
   }
 

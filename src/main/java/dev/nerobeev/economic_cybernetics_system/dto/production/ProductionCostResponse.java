@@ -20,7 +20,7 @@ public record ProductionCostResponse(
     Long insuranceCost,
     Long researchAndDevelopmentCost,
     Long interestCost,
-    Long ecoCost
-
+    Long ecoCost,
+    Long total //todo
 ) {
 }
