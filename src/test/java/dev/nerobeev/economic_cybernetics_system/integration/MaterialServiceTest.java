@@ -18,6 +18,8 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
         properties = {"server.port=8081"})

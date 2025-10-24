@@ -65,7 +65,7 @@ public class MaterialService {
   }
 
   // расчет стоимости Материала
-  public Long calculateCostOfMaterial(String materialName, String prodCostName) {
+  public Long calculateCostOfMaterial(String materialName, String prodCostName) { //todo DANYA
 
     if (materialName == null || prodCostName == null) {
       throw new RuntimeException("MaterialName or productionCostName cannot contains null."); //todo
