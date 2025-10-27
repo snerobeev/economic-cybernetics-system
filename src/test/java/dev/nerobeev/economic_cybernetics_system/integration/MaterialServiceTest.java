@@ -6,7 +6,7 @@ import dev.nerobeev.economic_cybernetics_system.domain.UnitOfMeasure;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.entity.Material;
-import dev.nerobeev.economic_cybernetics_system.exeption.MaterialNotFoundException;
+import dev.nerobeev.economic_cybernetics_system.exception.MaterialNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.repository.MaterialRepository;
 import dev.nerobeev.economic_cybernetics_system.service.MaterialService;
 import dev.nerobeev.economic_cybernetics_system.service.ProductionCostService;
@@ -45,8 +45,6 @@ class MaterialServiceTest {
         materialCreateRequest = new MaterialCreateRequest(
                 "Steel Alloy X1",             // name
                 UnitOfMeasure.TON,                  // unit
-                0L,                                 // costPerUnit
-                180L,                               // pricePerUnit
                 "Severstal",                        // producer
                 500L,                               // quantity
                 Status.RAW,                         // status
@@ -84,7 +82,7 @@ class MaterialServiceTest {
     }
 
     @Test()
-    @DisplayName("Positive. Calculate and update material costPerUnit.")
+    @DisplayName("Positive. Calculate and update material costPerUnit.") //todo
     void calculatesMaterialCostSuccessfully_Test() {
 
         var materialResponse = materialService.createMaterial(materialCreateRequest);
@@ -92,7 +90,7 @@ class MaterialServiceTest {
         var materialName = materialResponse.name();
         var prodCostName = prodCostResponse.name();
 
-        var result = materialService.calculateCostPerUnit(materialName, prodCostName);
+        var result = materialService.calculateCostPerUnit(materialName);
         var costPerUnit = materialRepository.findMaterialByName(materialName).stream()
                 .findFirst()
                 .map(Material::getCostPerUnit)

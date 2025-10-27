@@ -2,7 +2,7 @@ package dev.nerobeev.economic_cybernetics_system.advice;
 
 import dev.nerobeev.economic_cybernetics_system.dto.error.ErrorMessageResponse;
 import dev.nerobeev.economic_cybernetics_system.dto.error.FormatTimeStamp;
-import dev.nerobeev.economic_cybernetics_system.exeption.*;
+import dev.nerobeev.economic_cybernetics_system.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -54,6 +54,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
                          .body(new ErrorMessageResponse(exception.getMessage(), formattedTime));
   }
 
+  @ExceptionHandler({ProductionCostByNameNotFoundException.class})
+  public ResponseEntity<ErrorMessageResponse> handleProductionCostByNameNotFound(RuntimeException exception) {
+    log.warn("ProductCost by name found warn : {} ", exception.getMessage(), exception);
+    var formattedTime = formatTimeStamp(Instant.now());
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                         .body(new ErrorMessageResponse(exception.getMessage(), formattedTime));
+  }
+
   @ExceptionHandler({ComponentNotFoundException.class})
   public ResponseEntity<ErrorMessageResponse> handleComponentNotFound(RuntimeException exception) {
     log.warn("Component found warn : {} ", exception.getMessage(), exception);
@@ -69,5 +77,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
                          .body(new ErrorMessageResponse(exception.getMessage(), formattedTime));
   }
+
+  @ExceptionHandler({MaterialByNameNotFoundException.class})
+  public ResponseEntity<ErrorMessageResponse> handleMaterialWithThisNameNotFound(RuntimeException exception) {
+    log.warn("Material name found warn : {} ", exception.getMessage(), exception);
+    var formattedTime = formatTimeStamp(Instant.now());
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                         .body(new ErrorMessageResponse(exception.getMessage(), formattedTime));
+  }
+
+  @ExceptionHandler({CompanyNotFoundException.class})
+  public ResponseEntity<ErrorMessageResponse> handleCompanyNotFound(RuntimeException exception) {
+    log.warn("Producer found warn : {} ", exception.getMessage(), exception);
+    var formattedTime = formatTimeStamp(Instant.now());
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                         .body(new ErrorMessageResponse(exception.getMessage(), formattedTime));
+  }
+
+
 
 }

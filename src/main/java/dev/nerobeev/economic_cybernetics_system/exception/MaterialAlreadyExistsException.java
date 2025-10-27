@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.exeption;
+package dev.nerobeev.economic_cybernetics_system.exception;
 
 public class MaterialAlreadyExistsException extends RuntimeException {
   public MaterialAlreadyExistsException(String name) {

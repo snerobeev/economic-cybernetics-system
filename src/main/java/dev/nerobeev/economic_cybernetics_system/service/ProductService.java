@@ -4,7 +4,7 @@ import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingGenerat
 import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.product.ProductResponse;
-import dev.nerobeev.economic_cybernetics_system.exeption.ProductNotFoundException;
+import dev.nerobeev.economic_cybernetics_system.exception.ProductNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.ProductMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;

@@ -3,7 +3,7 @@ package dev.nerobeev.economic_cybernetics_system.service;
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.Material;
-import dev.nerobeev.economic_cybernetics_system.exeption.ProductionCostNotFoundException;
+import dev.nerobeev.economic_cybernetics_system.exception.ProductionCostNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.ProductionCostMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.ProductionCostRepository;
 import lombok.Builder;
@@ -57,6 +57,7 @@ public class ProductionCostService {
                                                  .orElseThrow(() -> new ProductionCostNotFoundException(id));
     return productionCostMapper.toResponse(productionCost);
   }
+
   // Суммирует все Затраты Материала (у каждого вида Материала - свои Затраты)
   public Long computeTotalCost(String prodCostName) {
     var result = productionCostRepository.findCostByName(prodCostName).stream()
@@ -81,6 +82,7 @@ public class ProductionCostService {
 
     return result.sum();
   }
+
   // Суммирует все стоимости Материалов общую стоимость из списка Материалов
   public Long getTotalCostPerUnitFromAllMaterials(Set<Material> materials) {
       if(materials.isEmpty()) {

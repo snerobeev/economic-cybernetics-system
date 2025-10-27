@@ -8,7 +8,7 @@ import dev.nerobeev.economic_cybernetics_system.dto.component.ComponentResponse;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.Component;
 import dev.nerobeev.economic_cybernetics_system.entity.Material;
-import dev.nerobeev.economic_cybernetics_system.exeption.MaterialNotFoundException;
+import dev.nerobeev.economic_cybernetics_system.exception.MaterialNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.repository.ComponentRepository;
 import dev.nerobeev.economic_cybernetics_system.repository.MaterialRepository;
 import dev.nerobeev.economic_cybernetics_system.service.ComponentService;

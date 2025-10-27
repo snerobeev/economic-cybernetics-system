@@ -1,9 +1,10 @@
 package dev.nerobeev.economic_cybernetics_system.domain;
 
 public enum Status {
-  RAW,                // Материал
-  COMPONENT,          // Компонент
-  PRODUCT,            // Продукт
+  RAW,                // Сырой материал (нефть, руда, древесина и тд)
+  PROCESSED,          // Обработанный материал (бензин, сталь, доска и тд)
+  COMPONENT,          // Компонент (состоящий из множества материалов)
+  PRODUCT,            // Продукт (состоящий из множества компонентов и материалов)
   EXPORTED_PRODUCT,   // Экспортируемый продукт
   RECYCLED,           // Переработанный
   INVENTORY           // Складской остаток

@@ -6,3 +6,7 @@
 | - type: String |        | - materials: 
                            List<Material> | - components: List<Component> |
 +----------------+        +----------------+        +----------------+
+
+
+
+1.Игрок 

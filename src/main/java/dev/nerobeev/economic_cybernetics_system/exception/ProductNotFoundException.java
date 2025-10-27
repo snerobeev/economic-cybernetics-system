@@ -1,4 +1,4 @@
-package dev.nerobeev.economic_cybernetics_system.exeption;
+package dev.nerobeev.economic_cybernetics_system.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;

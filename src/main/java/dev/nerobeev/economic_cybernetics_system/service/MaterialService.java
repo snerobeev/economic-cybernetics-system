@@ -5,10 +5,9 @@ import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialResponse;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialUpdateRequest;
-import dev.nerobeev.economic_cybernetics_system.exeption.MaterialNotFoundException;
+import dev.nerobeev.economic_cybernetics_system.exception.MaterialNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.MaterialMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.MaterialRepository;
-import dev.nerobeev.economic_cybernetics_system.repository.ProductionCostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -71,8 +70,6 @@ public class MaterialService {
 
     var material = materialRepository.findMaterialByName(materialName)
                                      .orElseThrow();
-
-    material.setCostPerUnit(sumMaterialWithComputedTotalCost); // todo DANYA
 
     var materialWithCostPerUnit = materialRepository.save(material);
 

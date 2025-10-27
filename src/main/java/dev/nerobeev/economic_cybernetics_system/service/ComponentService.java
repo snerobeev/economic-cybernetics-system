@@ -6,7 +6,7 @@ import dev.nerobeev.economic_cybernetics_system.dto.component.ComponentCreateReq
 import dev.nerobeev.economic_cybernetics_system.dto.component.ComponentResponse;
 import dev.nerobeev.economic_cybernetics_system.dto.production.ProductionCostResponse;
 import dev.nerobeev.economic_cybernetics_system.entity.Material;
-import dev.nerobeev.economic_cybernetics_system.exeption.ComponentNotFoundException;
+import dev.nerobeev.economic_cybernetics_system.exception.ComponentNotFoundException;
 import dev.nerobeev.economic_cybernetics_system.mapper.ComponentMapper;
 import dev.nerobeev.economic_cybernetics_system.repository.ComponentRepository;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +51,6 @@ public class ComponentService {
   // на вход - материалы,
   // на выход описание издержек, результат и вопрос - точно ли готов делать компонент
   public ProductionCostResponse calculateCostAndValidateReadiness(Set<Material> materials) {
-    var totalCost = productionCostService.getTotalCostPerUnitFromAllMaterials(materials); // todo DANYA
     // ProductionCostResponse
     return null;
   }
