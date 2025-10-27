@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface CompanyRepository extends JpaRepository<Producer,Long> {
+public interface ProducerRepository extends JpaRepository<Producer,Long> {
   Optional<Producer> findById(Long id);
 }
