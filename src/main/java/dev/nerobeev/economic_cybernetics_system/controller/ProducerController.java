@@ -1,7 +1,5 @@
 package dev.nerobeev.economic_cybernetics_system.controller;
 
-import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
-import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialResponse;
 import dev.nerobeev.economic_cybernetics_system.dto.producer.ProducerCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.producer.ProducerResponse;
 import dev.nerobeev.economic_cybernetics_system.service.ProducerService;

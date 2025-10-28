@@ -18,8 +18,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
         properties = {"server.port=8081"})
@@ -84,9 +82,8 @@ class MaterialServiceTest {
     @Test()
     @DisplayName("Positive. Calculate and update material costPerUnit.") //todo
     void calculatesMaterialCostSuccessfully_Test() {
-
-        var materialResponse = materialService.createMaterial(materialCreateRequest);
         var prodCostResponse = productionCostService.createProductionCost(productionCostCreateRequest);
+        var materialResponse = materialService.createMaterial(materialCreateRequest);
         var materialName = materialResponse.name();
         var prodCostName = prodCostResponse.name();
 
@@ -96,8 +93,18 @@ class MaterialServiceTest {
                 .map(Material::getCostPerUnit)
                 .orElseThrow(() -> new MaterialNotFoundException(materialResponse.id()));
 
-        System.out.println("----------------------------- " + result);
+        var result2= materialService.computePricePerUnit(materialName);
+        var pricePerUnit = materialRepository.findMaterialByName(materialName).stream()
+                        .findFirst()
+                        .map(Material::getPricePerUnit)
+                        .orElseThrow(() -> new MaterialNotFoundException(materialResponse.id()));
+
+        System.out.println("-----------RESULT CostPerUnit--------------- " + result);
         Assertions.assertEquals(materialName, prodCostName);
         Assertions.assertEquals(costPerUnit, result);
+
+        System.out.println("-----------RESULT2 PricePerUnit------------- " + result2);
+        Assertions.assertEquals(materialName, prodCostName);
+        Assertions.assertEquals(pricePerUnit,result2);
     }
 }

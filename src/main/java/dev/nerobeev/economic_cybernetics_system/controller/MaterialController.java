@@ -20,34 +20,32 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MaterialController {
 
-  private final MaterialService materialService;
-  private final ProductionCostRepository productionCostRepository;
-  private final ProductionCostService productionCostService;
-  private final ProducerService producerService;
-  private final MaterialRepository materialRepository;
+    private final MaterialService materialService;
+    private final ProductionCostRepository productionCostRepository;
+    private final ProductionCostService productionCostService;
+    private final ProducerService producerService;
+    private final MaterialRepository materialRepository;
 
-  @GetMapping
-  public ResponseEntity<List<MaterialResponse>> getAllMaterials() {
-    var materials = materialService.getAllMaterials();
-    return ResponseEntity.ok().header("X-Total-Count", String.valueOf(materials.size())).body(materials);
-  }
+    @GetMapping
+    public ResponseEntity<List<MaterialResponse>> getAllMaterials() {
+        var materials = materialService.getAllMaterials();
+        return ResponseEntity.ok().header("X-Total-Count", String.valueOf(materials.size())).body(materials);
+    }
 
-  @GetMapping("/{id}")
-  public MaterialResponse getMaterialById(@PathVariable Long id) {
-    return materialService.getMaterialById(id);
-  }
+    @GetMapping("/{id}")
+    public MaterialResponse getMaterialById(@PathVariable Long id) {
+        return materialService.getMaterialById(id);
+    }
 
-  @PostMapping
-  @ResponseStatus(HttpStatus.CREATED)
-  public MaterialResponse createMaterial(@RequestBody @Valid MaterialCreateRequest request) {
-  var quantity = request.quantity();
-  // todo
-    return materialService.createMaterial(request);
-  }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public MaterialResponse createMaterial(@RequestBody @Valid MaterialCreateRequest request) {
+        return materialService.createMaterial(request);
+    }
 
-  @DeleteMapping("/{id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteMaterial(@PathVariable Long id) {
-    materialService.deleteMaterial(id);
-  }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteMaterial(@PathVariable Long id) {
+        materialService.deleteMaterial(id);
+    }
 }

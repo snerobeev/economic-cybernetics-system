@@ -16,6 +16,5 @@ public interface ProducerMapper {
 
     Producer toEntity(ProducerCreateRequest request);
     ProducerResponse toResponse(Producer entity);
-    void updateEntity(Producer entity, ProducerUpdateRequest updateRequest);
 
 }
