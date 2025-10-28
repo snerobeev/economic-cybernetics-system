@@ -80,7 +80,7 @@ class MaterialServiceTest {
     }
 
     @Test()
-    @DisplayName("Positive. Calculate and update material costPerUnit.") //todo
+    @DisplayName("Positive calculate and update material costs.")
     void calculatesMaterialCostSuccessfully_Test() {
         var prodCostResponse = productionCostService.createProductionCost(productionCostCreateRequest);
         var materialResponse = materialService.createMaterial(materialCreateRequest);
@@ -93,7 +93,7 @@ class MaterialServiceTest {
                 .map(Material::getCostPerUnit)
                 .orElseThrow(() -> new MaterialNotFoundException(materialResponse.id()));
 
-        var result2= materialService.computePricePerUnit(materialName);
+        var result2= materialService.calculatePricePerUnit(materialName);
         var pricePerUnit = materialRepository.findMaterialByName(materialName).stream()
                         .findFirst()
                         .map(Material::getPricePerUnit)

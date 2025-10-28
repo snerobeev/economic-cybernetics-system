@@ -27,19 +27,10 @@ public class MaterialService {
 
     public MaterialResponse createMaterial(MaterialCreateRequest request) {
         var material = materialMapper.toEntity(request, markingGenerator);
-        material.setName(request.name());
-        material.setUnit(request.unit());
         var totalCost = computeTotalProdCost(request.name());        // сумма затрат за единицу
         material.setCostPerUnit(totalCost);                                // установка суммы затрат
-        var totalPricePerUnit = computePricePerUnit(request.name()); // добавленная стоимость за ед
+        var totalPricePerUnit = calculatePricePerUnit(request.name()); // добавленная стоимость за ед
         material.setPricePerUnit(totalPricePerUnit);                       // установка добавленной стоимости
-        material.setProducer(request.producer());
-        material.setQuantity(request.quantity());
-        material.setStatus(request.status());
-        material.setIndustryCode(request.industryCode());
-        material.setPlanPeriod(request.planPeriod());
-        material.setProductionDate(request.productionDate());
-        material.setStrategic(request.strategic());
         material.setCode(markingGenerator.generate(MarkingType.MATERIAL));
         var savedMaterial = materialRepository.save(material);
         log.info("Material with ID: {}", material.getId() + " created");
@@ -83,7 +74,7 @@ public class MaterialService {
         return materialWithCostPerUnit.getCostPerUnit();
     }
     // расчет добавленной стоимости Материала
-    public Long computePricePerUnit(String prodCostName) {
+    public Long calculatePricePerUnit(String prodCostName) {
         var totalCost = computeTotalProdCost(prodCostName);
         var divide = totalCost / 2;
         return totalCost + divide; // пока так

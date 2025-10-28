@@ -221,5 +221,6 @@ class ComponentServiceTest {
         .ignoringFields()
         .isEqualTo(expectedSteel);
   }
+    // на вход - материлы, на выход описание издержек, результат и вопрос - точно ли готов делать компонент
 
 }

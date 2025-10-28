@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Set;
 
-@Service
 @Slf4j
+@Service
 @RequiredArgsConstructor
 public class ComponentService {
 
@@ -50,7 +50,7 @@ public class ComponentService {
 
   // на вход - материалы,
   // на выход описание издержек, результат и вопрос - точно ли готов делать компонент
-  public ProductionCostResponse calculateCostAndValidateReadiness(Set<Material> materials) {
+  public ProductionCostResponse calculateCostOfMaterialsAndValidateReadiness(Set<Material> materials) {
     // ProductionCostResponse
     return null;
   }
