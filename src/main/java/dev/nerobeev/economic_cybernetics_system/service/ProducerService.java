@@ -5,6 +5,7 @@ import dev.nerobeev.economic_cybernetics_system.domain.markerator.MarkingType;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialResponse;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialUpdateRequest;
+import dev.nerobeev.economic_cybernetics_system.dto.producer.ProducerCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.producer.ProducerResponse;
 import dev.nerobeev.economic_cybernetics_system.dto.producer.ProducerUpdateRequest;
 import dev.nerobeev.economic_cybernetics_system.entity.Producer;
@@ -33,6 +34,13 @@ public class ProducerService {
     private final MarkingGenerator markingGenerator;
     private final MaterialMapper materialMapper;
 
+
+    public ProducerResponse createProducer(ProducerCreateRequest request) {
+     var producer = producerMapper.toEntity(request);
+     producerRepository.save(producer);
+     log.info("Producer with ID: {}", producer.getId() + " created");
+     return producerMapper.toResponse(producer);
+    }
 
     public List<ProducerResponse> getAllProducers() {
         return producerRepository.findAll().stream()
@@ -97,7 +105,6 @@ public class ProducerService {
         var markedMaterial = materialMapper.toEntity(request, markingGenerator);
         materialRepository.save(markedMaterial);
         return markedMaterial;
-
     }
 
     public Long computePricePerUnit(String prodCostName) {

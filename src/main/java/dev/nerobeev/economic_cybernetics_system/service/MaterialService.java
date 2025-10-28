@@ -24,7 +24,6 @@ public class MaterialService {
   private final MarkingGenerator markingGenerator;
 
   public MaterialResponse createMaterial(MaterialCreateRequest request) {
-
     var material = materialMapper.toEntity(request, markingGenerator);
     material.setCode(markingGenerator.generate(MarkingType.MATERIAL));
     var savedMaterial = materialRepository.save(material);

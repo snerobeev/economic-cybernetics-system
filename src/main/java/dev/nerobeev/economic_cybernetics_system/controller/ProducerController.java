@@ -2,6 +2,7 @@ package dev.nerobeev.economic_cybernetics_system.controller;
 
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.material.MaterialResponse;
+import dev.nerobeev.economic_cybernetics_system.dto.producer.ProducerCreateRequest;
 import dev.nerobeev.economic_cybernetics_system.dto.producer.ProducerResponse;
 import dev.nerobeev.economic_cybernetics_system.service.ProducerService;
 import jakarta.validation.Valid;
@@ -21,27 +22,26 @@ public class ProducerController {
 
     @GetMapping
     public ResponseEntity<List<ProducerResponse>> getAllProducers() {
-        var producerss = producerService.getAllMaterials();
-        return ResponseEntity.ok().header("X-Total-Count", String.valueOf(materials.size())).body(materials);
+        var producers = producerService.getAllProducers();
+        return ResponseEntity.ok()
+                .header("X-Total-Count", String.valueOf(producers.size())).body(producers);
     }
 
     @GetMapping("/{id}")
-    public MaterialResponse getMaterialById(@PathVariable Long id) {
-        return materialService.getMaterialById(id);
+    public ProducerResponse getProducerById(@PathVariable Long id) {
+        return producerService.getProducerById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MaterialResponse createMaterial(@RequestBody @Valid MaterialCreateRequest request) {
-        var quantity = request.quantity();
-        // todo
-        return materialService.createMaterial(request);
+    public ProducerResponse createProducer(@RequestBody @Valid ProducerCreateRequest request) {
+        return producerService.createProducer(request);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteMaterial(@PathVariable Long id) {
-        materialService.deleteMaterial(id);
+    public void deleteProducer(@PathVariable Long id) {
+        producerService.deleteProducer(id);
     }
 
 }
